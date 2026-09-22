@@ -80,7 +80,7 @@ export const experience = [
     team: 'PCIe Subsystem',
     org: 'AMD',
     location: 'Toronto, ON',
-    period: 'May 2025 — present',
+    period: 'May 2026 — present',
     domains: ['signoff', 'rtl', 'ml'],
     bullets: [
       'Own the team’s Tcl async-FIFO extraction script, run under Synopsys Design Compiler. It reads RTL alongside build-time feature flags to classify edge cases correctly — continuous streaming phase-adjustment FIFOs among them — and produces per-tile reference lists, pinned to a changelist, that partner teams check for post-synthesis netlist equivalence and for pointer race conditions across gray-code crossings.',
@@ -151,7 +151,7 @@ export const projects = [
     date: 'Mar 2026',
     domains: ['embedded'],
     title: 'Gesture-Based Presentation Controller',
-    result: 'Third of 100+ course project groups',
+    result: '3rd place out of 100+ course project groups',
     body:
       'A wireless gesture controller on an STM32F446ZE with a BNO055 IMU, talking to an ESP32 acting as a BLE HID device. IMU quaternion data maps to cursor motion and slide-change gestures over a UART link between the two MCUs. I characterized end-to-end latency, bandwidth and power across the sensing, firmware, wireless and feedback subsystems, because on a controller people hold in their hand, latency is the feature.',
     stack: ['STM32F446ZE', 'BNO055', 'ESP32', 'BLE HID', 'C', 'UART'],
@@ -222,9 +222,9 @@ export const projects = [
     date: 'Mar 2025',
     domains: ['ml'],
     title: 'AI First Responder Assistant',
-    result: 'Working MVP in 48 hours, recognized for real-world impact',
+    result: 'Working MVP in 48 hours',
     body:
-      'A hackathon build: React and Firebase, QR-coded patient profiles, and a Gemini-backed chatbot answering context-aware medical questions against a Firestore-held record. Shipped end to end inside the 48 hours.',
+      'A hackathon build: React and Firebase, QR-coded patient profiles, and a Gemini-backed chatbot answering context-aware medical questions against a Firestore-held record. Shipped end to end.',
     stack: ['React', 'Firebase', 'Firestore', 'JavaScript', 'Gemini'],
     image: null,
     href: null,
