@@ -558,7 +558,7 @@ export const games = [
     id: 'gates',
     name: 'Gate puzzle',
     blurb:
-      'Pick gates and inverters until your output column matches the target. Five levels, ending at a full-adder sum.',
+      'Drag AND, OR, XOR and NOT onto the board until your output column matches the target. Puzzles are generated, so they never run out \u2014 two inputs and one gate to start, three inputs and two gates once you get going.',
   },
   {
     id: 'bits',

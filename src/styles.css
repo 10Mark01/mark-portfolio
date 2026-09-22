@@ -1510,60 +1510,138 @@ footer h2 {
 
 /* ---- gate puzzle ---- */
 
-.gate-rig {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  align-items: stretch;
+.gate {
+  position: relative;
 }
 
-.gate-inputs,
-.gate-slots {
+.bin {
   display: flex;
-  gap: 6px;
   flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
 }
 
-.gate-inv,
-.gate-slot {
+.chip {
   font-family: var(--mono);
+  font-size: 13px;
+  color: var(--ink);
   background: var(--ground);
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-strong);
   border-radius: var(--radius);
-  padding: 8px 12px;
-  cursor: pointer;
+  padding: 8px 14px;
+  cursor: grab;
+  /* Without this a drag on the board scrolls the page on a phone. */
+  touch-action: none;
+  user-select: none;
+}
+
+.chip:hover {
+  border-color: var(--copper);
+}
+
+.chip.is-held {
+  color: var(--copper);
+  border-color: var(--copper);
+  background: var(--copper-wash);
+}
+
+.chip-not {
+  color: var(--via);
+}
+
+.chip-ghost {
+  position: fixed;
+  z-index: 40;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0.92;
+  border-color: var(--copper);
+  background: var(--surface);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+}
+
+.bin-hint {
+  margin-left: 4px;
+}
+
+.rig {
   display: flex;
   flex-direction: column;
-  gap: 3px;
-  align-items: flex-start;
+  gap: 10px;
+}
+
+.rig-stage {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.rig-legs {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rig-leg {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rig-sig {
+  font-family: var(--mono);
+  font-size: 14px;
   color: var(--ink);
+  width: 16px;
 }
 
-.gate-inv {
-  min-width: 56px;
-  font-size: 15px;
+.rig-out {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--faint);
 }
 
-.gate-inv.is-on {
+.drop {
+  font-family: var(--mono);
+  background: transparent;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius);
+  color: var(--faint);
+  cursor: pointer;
+}
+
+.drop-inv {
+  font-size: 11px;
+  padding: 3px 8px;
+  min-width: 44px;
+}
+
+.drop-gate {
+  font-size: 14px;
+  padding: 12px 18px;
+  min-width: 84px;
+}
+
+.drop:hover {
+  border-color: var(--copper);
+  color: var(--copper);
+}
+
+.drop.is-set {
+  border-style: solid;
+  border-color: var(--copper);
+  color: var(--copper);
+  background: var(--surface);
+}
+
+.drop-inv.is-set {
   border-color: var(--via);
   color: var(--via);
 }
 
-.gate-inv-tag,
-.gate-slot-hint {
-  font-size: 10px;
-  color: var(--faint);
-  letter-spacing: 0.04em;
-}
-
-.gate-slot-name {
-  font-size: 15px;
+.gate-win {
   color: var(--copper);
-}
-
-.gate-slot:hover,
-.gate-inv:hover {
-  border-color: var(--line-strong);
 }
 
 .tt {
