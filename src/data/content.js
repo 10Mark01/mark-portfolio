@@ -530,6 +530,6 @@ export const offTheClock = {
 export const footer = {
   heading: 'Let’s talk.',
   body:
-    'I’m looking for a Summer 2027 internship in RTL design, verification or physical design. Happy to talk about anything on this page — or about what your team actually needs an intern to do.',
+    'I’m looking for a Winter or Summer 2027 internship in RTL design, verification or physical design. Happy to talk about anything on this page — or about what your team actually needs an intern to do.',
   colophon: 'Mark Samuel — Toronto, ON — last updated September 2026',
 };
