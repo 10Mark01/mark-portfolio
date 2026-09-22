@@ -1,0 +1,1193 @@
+/* ==========================================================================
+   Tokens
+
+   Light is the base. Dark is defined twice on purpose: once behind the
+   data-theme stamp that index.html writes, and once behind prefers-color-scheme
+   for the case where JavaScript never runs. The media query is guarded against
+   an explicit light choice so the toggle wins in both directions.
+   ========================================================================== */
+
+:root {
+  --ground: #f4f4f8;
+  --surface: #ffffff;
+  --ink: #15161c;
+  --muted: #5e606e;
+  --faint: #8a8c99;
+  --line: #e1e1e9;
+  --line-strong: #c7c7d3;
+  --copper: #9e4e1e;
+  --copper-wash: #f2e7df;
+  --via: #474ca4;
+  --die: #ebebf1;
+
+  --sans: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+  --display: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --mono: 'IBM Plex Mono', 'SFMono-Regular', Menlo, Consolas, monospace;
+
+  --measure: 62ch;
+  --radius: 3px;
+
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --ground: #0d0e13;
+  --surface: #15161d;
+  --ink: #e9e9f0;
+  --muted: #9698a6;
+  --faint: #6c6f7e;
+  --line: #242631;
+  --line-strong: #383b49;
+  --copper: #e08b4e;
+  --copper-wash: #2a1f16;
+  --via: #8d91ec;
+  --die: #1a1c24;
+
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --ground: #0d0e13;
+    --surface: #15161d;
+    --ink: #e9e9f0;
+    --muted: #9698a6;
+    --faint: #6c6f7e;
+    --line: #242631;
+    --line-strong: #383b49;
+    --copper: #e08b4e;
+    --copper-wash: #2a1f16;
+    --via: #8d91ec;
+    --die: #1a1c24;
+
+    color-scheme: dark;
+  }
+}
+
+/* ==========================================================================
+   Reset
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Anchors land below the sticky nav instead of under it. */
+  scroll-padding-top: 76px;
+}
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+p,
+figure,
+dl,
+dd {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--copper);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 8px;
+  padding: 10px 16px;
+  background: var(--surface);
+  border: 1px solid var(--copper);
+  border-radius: var(--radius);
+  font-family: var(--mono);
+  font-size: 13px;
+  text-decoration: none;
+  z-index: 20;
+}
+
+.skip:focus {
+  left: 20px;
+}
+
+/* ==========================================================================
+   Layout
+   ========================================================================== */
+
+.page {
+  max-width: 920px;
+  margin: 0 auto;
+  padding-inline: 20px;
+  padding-block: 0 72px;
+}
+
+/* ==========================================================================
+   Type primitives
+   ========================================================================== */
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.eyebrow .sep {
+  color: var(--line-strong);
+  padding: 0 8px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--display);
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(38px, 7vw, 60px);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.02;
+}
+
+h2 {
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.006em;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  line-height: 1.25;
+}
+
+.lede {
+  font-size: 18px;
+  line-height: 1.58;
+  color: var(--muted);
+  max-width: 56ch;
+}
+
+.prose {
+  max-width: var(--measure);
+  color: var(--muted);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.prose strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   Masthead
+   ========================================================================== */
+
+.mast {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding-block: 44px 34px;
+}
+
+.mast-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.theme-toggle {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.theme-toggle:hover {
+  color: var(--copper);
+  border-color: var(--copper);
+}
+
+.spec {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  overflow: hidden;
+  margin-top: 6px;
+}
+
+.spec > div {
+  padding: 11px 14px;
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.spec > div:last-child {
+  border-right: none;
+}
+
+.spec dt {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.spec dd {
+  font-family: var(--mono);
+  font-size: 13.5px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.spec dd.live {
+  color: var(--copper);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.links a {
+  font-family: var(--mono);
+  font-size: 13px;
+  text-decoration: none;
+  padding: 7px 13px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.links a:hover {
+  border-color: var(--copper);
+  color: var(--copper);
+}
+
+/* ==========================================================================
+   Floorplan
+   ========================================================================== */
+
+.floorplan {
+  margin-block: 8px 28px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 14px;
+}
+
+.floorplan svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.floorplan figcaption {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--faint);
+  margin-top: 10px;
+  letter-spacing: 0.02em;
+}
+
+.floorplan .hint {
+  color: var(--copper);
+}
+
+.block rect {
+  fill: var(--surface);
+  stroke: var(--line-strong);
+  stroke-width: 1;
+  transition: fill 0.18s ease, stroke 0.18s ease;
+}
+
+.block {
+  cursor: pointer;
+}
+
+.block:hover rect {
+  stroke: var(--copper);
+}
+
+.block.is-active rect {
+  fill: var(--copper-wash);
+  stroke: var(--copper);
+  stroke-width: 1.6;
+}
+
+.block.is-dimmed {
+  opacity: 0.42;
+}
+
+.block-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.6px;
+  fill: var(--ink);
+  pointer-events: none;
+}
+
+.block-sub {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.5px;
+  fill: var(--faint);
+  pointer-events: none;
+}
+
+.die-mark {
+  font-family: var(--mono);
+  font-size: 8.5px;
+  letter-spacing: 1.2px;
+  fill: var(--faint);
+}
+
+svg.is-filtered .traces {
+  opacity: 0.4;
+}
+
+.block:focus-visible {
+  outline: none;
+}
+
+.block:focus-visible rect {
+  stroke: var(--copper);
+  stroke-width: 2;
+  /* SVG ignores outline-offset, so the focus ring is drawn as a dash. */
+  stroke-dasharray: 4 3;
+}
+
+/* ==========================================================================
+   Section nav
+   ========================================================================== */
+
+.secnav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: color-mix(in srgb, var(--ground) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+  margin-inline: -20px;
+  padding-inline: 20px;
+}
+
+.secnav ul {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.secnav ul::-webkit-scrollbar {
+  display: none;
+}
+
+.secnav a {
+  display: block;
+  white-space: nowrap;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--faint);
+  padding: 13px 10px;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.secnav a:hover {
+  color: var(--ink);
+}
+
+.secnav a.is-active {
+  color: var(--copper);
+  border-bottom-color: var(--copper);
+}
+
+/* ==========================================================================
+   Sections
+   ========================================================================== */
+
+section {
+  padding-block: 34px;
+  border-top: 1px solid var(--line);
+}
+
+section:first-of-type {
+  border-top: none;
+}
+
+.sec-head {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.sec-head h2 {
+  flex: none;
+}
+
+.sec-head .rule {
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+.sec-head .count {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--faint);
+  letter-spacing: 0.1em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   Projects
+   ========================================================================== */
+
+.filterbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--muted);
+  padding: 9px 13px;
+  margin-top: 18px;
+  background: var(--copper-wash);
+  border-radius: var(--radius);
+}
+
+.filterbar strong {
+  color: var(--copper);
+  font-weight: 500;
+}
+
+.filterbar button {
+  margin-left: auto;
+  background: none;
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+  padding: 3px 10px;
+  font-family: var(--mono);
+  font-size: 12px;
+  cursor: pointer;
+  color: var(--ink);
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.filterbar button:hover {
+  border-color: var(--copper);
+  color: var(--copper);
+}
+
+/* ==========================================================================
+   Experience
+
+   No card fill here: the roles are the page's strongest evidence, so they get
+   open space and a copper rule rather than being boxed like everything else.
+   ========================================================================== */
+
+.exp-list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.exp {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  padding-left: 16px;
+  border-left: 2px solid var(--copper);
+}
+
+.exp-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.exp-head h3 {
+  font-size: 18px;
+}
+
+.exp-team {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.exp-org {
+  font-size: 15px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.exp-org strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.exp-loc {
+  color: var(--faint);
+}
+
+.exp-period {
+  flex: none;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--faint);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.exp-bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  max-width: 68ch;
+}
+
+.exp-bullets li {
+  position: relative;
+  padding-left: 17px;
+  font-size: 15.5px;
+  color: var(--muted);
+}
+
+/* A square marker rather than a disc — it matches the vias in the floorplan
+   and keeps the page's geometry consistent. */
+.exp-bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 5px;
+  height: 5px;
+  background: var(--line-strong);
+}
+
+/* ==========================================================================
+   Projects
+   ========================================================================== */
+
+.projects {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.proj {
+  display: grid;
+  grid-template-columns: 108px 1fr;
+  gap: 0 22px;
+  padding: 22px 18px 22px 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.proj-rail {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-top: 6px;
+}
+
+.proj .tag {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--copper);
+}
+
+.proj-date {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.proj-image {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  margin-block: 3px;
+}
+
+.proj-body {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  min-width: 0;
+}
+
+.proj h3 a {
+  text-decoration: none;
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.proj h3 a:hover {
+  border-bottom-color: var(--copper);
+  color: var(--copper);
+}
+
+.proj .ext {
+  font-size: 0.75em;
+  margin-left: 4px;
+  vertical-align: 2px;
+}
+
+.proj .result {
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.5;
+  padding: 7px 11px;
+  background: var(--copper-wash);
+  border-radius: var(--radius);
+  align-self: start;
+  max-width: 100%;
+}
+
+.proj .detail {
+  color: var(--muted);
+  font-size: 15.5px;
+  max-width: 58ch;
+}
+
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.stack li {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  padding: 2px 7px;
+}
+
+/* Unfinished content. Deliberately loud — it should be annoying enough that
+   you never publish a page still wearing it. */
+.is-todo .result,
+.is-todo .detail,
+.is-todo h3,
+.is-todo .stack li,
+td.is-todo,
+.is-todo td,
+a.is-todo {
+  color: var(--copper);
+}
+
+.is-todo h3,
+.is-todo .detail,
+.is-todo td,
+a.is-todo {
+  text-decoration: underline dotted var(--copper);
+  text-underline-offset: 3px;
+}
+
+/* ==========================================================================
+   Parameters table
+   ========================================================================== */
+
+.tablewrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 540px;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+thead th {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--faint);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+tbody th {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+td {
+  font-size: 14.5px;
+  color: var(--muted);
+}
+
+tbody tr:last-child th,
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ==========================================================================
+   Teaching
+   ========================================================================== */
+
+.two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.note {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--copper);
+  border-radius: var(--radius);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.note .eyebrow {
+  color: var(--copper);
+}
+
+.note p {
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.note strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   Chips
+   ========================================================================== */
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 6px;
+}
+
+.chips li {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  padding: 4px 11px;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+footer {
+  padding-block: 38px 0;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+footer h2 {
+  font-size: 26px;
+}
+
+.colophon {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--faint);
+  letter-spacing: 0.04em;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  margin-top: 12px;
+}
+
+/* ==========================================================================
+   Narrow
+   ========================================================================== */
+
+/* ---------------------------------------------------------------------------
+   Slideshow
+   Slides are pre-rendered 16:9 WebP exports. The stage is a fixed-ratio box
+   so the card never reflows as a slide swaps; only the current image is
+   painted, the rest sit at opacity 0 underneath.
+   --------------------------------------------------------------------------- */
+
+.deck {
+  margin: 4px 0 2px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--die);
+}
+
+.deck:focus-visible {
+  outline: 2px solid var(--copper);
+  outline-offset: 2px;
+}
+
+.deck-stage {
+  position: relative;
+  aspect-ratio: 1400 / 790;
+  background: var(--die);
+}
+
+.deck-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 160ms ease;
+}
+
+.deck-slide.is-current {
+  opacity: 1;
+}
+
+.deck-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.deck-caption {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.deck-count {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--faint);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.deck-nav {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 120ms ease, border-color 120ms ease;
+}
+
+.deck-nav:hover:not(:disabled) {
+  color: var(--copper);
+  border-color: var(--copper);
+}
+
+.deck-nav:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* ---------------------------------------------------------------------------
+   Embedded simulator
+   The canvas is a fixed 640x480 VGA frame scaled to the column width with
+   nearest-neighbour, so the pixels stay square and hard-edged.
+   --------------------------------------------------------------------------- */
+
+.sim {
+  margin: 4px 0 2px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--die);
+}
+
+.sim-stage {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: #000;
+}
+
+.sim-canvas,
+.sim-poster {
+  display: block;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+}
+
+.sim-canvas:focus-visible {
+  outline: 2px solid var(--copper);
+  outline-offset: -2px;
+}
+
+.sim-cover {
+  position: absolute;
+  inset: 0;
+}
+
+.sim-poster {
+  opacity: 0.4;
+}
+
+.sim-overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+.sim-go {
+  padding: 9px 20px;
+  background: var(--surface);
+  border: 1px solid var(--copper);
+  border-radius: var(--radius);
+  color: var(--copper);
+  font-family: var(--mono);
+  font-size: 12.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.sim-go:hover:not(:disabled) { background: var(--copper-wash); }
+.sim-go:disabled { opacity: 0.6; cursor: default; }
+
+.sim-msg {
+  max-width: 34ch;
+  padding: 10px 14px;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  color: var(--muted);
+  font-size: 13px;
+  text-align: center;
+}
+
+.sim-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  padding: 8px 10px;
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.sim-mode,
+.sim-note {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--faint);
+  letter-spacing: 0.04em;
+}
+
+.sim-mode { color: var(--copper); text-transform: uppercase; }
+
+.sim-keys {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.sim-key {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 7px 3px 4px;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 120ms ease, border-color 120ms ease;
+}
+
+.sim-key:hover { color: var(--copper); border-color: var(--copper); }
+
+.sim-key-cap {
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  background: var(--die);
+  border-radius: 2px;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.sim-key-hint { font-size: 11px; white-space: nowrap; }
+
+@media (max-width: 640px) {
+  .sim-keys {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .sim-key { flex: 1 1 auto; justify-content: center; }
+  .sim-key-hint { display: none; }
+  .sim-key-cap { width: 20px; height: 20px; font-size: 11px; }
+
+  .deck-bar {
+    flex-wrap: wrap;
+  }
+
+  .deck-caption {
+    order: 3;
+    flex-basis: 100%;
+  }
+
+  .proj {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 18px 16px;
+  }
+
+  .proj-rail {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 10px;
+    padding-top: 0;
+  }
+
+  .exp-head {
+    gap: 4px;
+  }
+
+  .two {
+    grid-template-columns: 1fr;
+  }
+
+  .mast {
+    padding-block: 32px 28px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
