@@ -245,47 +245,172 @@ export const projects = [
       {
         src: '/projects/amplifier/slide-02.webp',
         caption:
-          'Requirement 3: 1–10 W of continuous output into a 50 Ω load. At least 1 W so the transmission carries reliably; under 10 W to keep the output in a safe range for the equipment.',
+          'The whole radio: a receive chain along the bottom, a transmit chain along the top. Subsystem F sits at the end of the transmit chain, amplifying the modulated signal and driving the antenna.',
       },
       {
         src: '/projects/amplifier/slide-03.webp',
         caption:
-          'A Class D switching network. Closing the switch pushes current through the inductor, storing magnetic energy; opening it releases that energy through the filter into the load, acting as a second source alongside the 12 V supply. Simulation gave 20 V peaks — about 4 W into 50 Ω.',
+          'What comes in is a modulated, low-power RF signal. The design philosophy throughout was efficiency — cut power loss, keep switching fast — because range and clarity both follow from it.',
       },
       {
         src: '/projects/amplifier/slide-04.webp',
         caption:
-          'On the physical PCB the output across the 50 Ω load was badly behaved, with occasional 102 mV peaks. Roughly 0.2 mW of inconsistent power, against a 1 W floor.',
+          'What the subsystem has to do: take the signal from Subsystem E, enter transmit mode on an enable line, deliver 1–10 W continuous, and suppress harmonics on the way out. The antenna is modelled as a 50 Ω dummy load.',
       },
       {
         src: '/projects/amplifier/slide-05.webp',
         caption:
-          'Root cause. Rise and fall times of 6.5 ns and 4.5 ns were fine for 14 MHz — the oversight was the gate driver’s 45 ns internal propagation delay, nearly 63% of the switching cycle. The MOSFETs switched late and sat between ON and OFF, collapsing the output swing and drawing so much current the supply never held 12 V; it averaged 3.9 V.',
+          'The design broken into stages. What makes it unusual is splitting amplification across three separate stages rather than doing it in one, colour-coded here against the schematic.',
       },
       {
         src: '/projects/amplifier/slide-06.webp',
         caption:
-          'A generic gate driver has one output pin that pulls the gate both high and low. Ours splits it into OUT_SRC and OUT_SNK. We had wired only OUT_SRC — the pin that closes the switch — so nothing could open it again.',
+          'Stage I, the comparator. It takes the 1 Vpp input up to 4.5–5 V, squaring the signal for the switching stage that follows.',
       },
       {
         src: '/projects/amplifier/slide-07.webp',
         caption:
-          'Walking the chain stage by stage: 1 Vpp in, boosted to 4.5–5 V by the comparator, then into the gate driver. Scoping each boundary is what localized where the signal died.',
+          'Stage II, the gate driver — it strengthens the comparator output so the transistors switch fully on and off instead of lingering between. Note the two output pins, OUT_SRC and OUT_SNK. That detail comes back.',
       },
       {
         src: '/projects/amplifier/slide-08.webp',
         caption:
-          'Reported as not met on this iteration of the PCB — with the cause identified rather than left open.',
+          'The Class D stage. Between milestones we replaced a series BJT–MOSFET pair with a gate driver feeding parallel MOSFETs, for more current into the load. Class D was chosen for efficiency and low heat.',
       },
       {
         src: '/projects/amplifier/slide-09.webp',
         caption:
-          'Three faults found across days of debugging: J13/J14 oriented backwards, bridged with M–F jumpers; a TLV1831 comparator whose open-drain output could only pull low, swapped for the push-pull TLV1841; and a stray 50 Ω footprint breaking the filter-to-output connection, closed with solder.',
+          'A Butterworth output filter, picked to avoid passband ripple and favour amplitude accuracy over phase linearity — linear phase meaning every frequency is delayed by exactly the same amount.',
       },
       {
         src: '/projects/amplifier/slide-10.webp',
         caption:
+          'The four stages end to end: comparator, gate driver, Class D amplifier, output filter.',
+      },
+      {
+        src: '/projects/amplifier/slide-11.webp',
+        caption:
+          'The requirements we were held to, as a table: output between 8–16 MHz, THD under 10% at 14 MHz, 1–10 W into 50 Ω, from +5 V and +12 V rails.',
+      },
+      {
+        src: '/projects/amplifier/slide-12.webp',
+        caption:
+          'Requirement 1 — amplification across 8–16 MHz, targeting 14 MHz.',
+      },
+      {
+        src: '/projects/amplifier/slide-13.webp',
+        caption:
+          'Component values for the inductors and capacitors were calculated to put the cutoff at 16 MHz.',
+      },
+      {
+        src: '/projects/amplifier/slide-14.webp',
+        caption:
+          'Measured on the oscilloscope, driven from the test board and function generator, sampled at the 50 Ω load: 14.04 MHz in, 13.97 MHz out.',
+      },
+      {
+        src: '/projects/amplifier/slide-15.webp',
+        caption:
+          'The band matters because Subsystem A, the receiver, only detects between 8 and 16 MHz — anything outside would be filtered out at the far end. It is also the amateur allocation, so transmitting outside it would interfere with other services.',
+      },
+      {
+        src: '/projects/amplifier/slide-16.webp',
+        caption:
+          'Requirement 1: met.',
+      },
+      {
+        src: '/projects/amplifier/slide-17.webp',
+        caption:
+          'Requirement 2 — total harmonic distortion below 10% with a 14 MHz input.',
+      },
+      {
+        src: '/projects/amplifier/slide-18.webp',
+        caption:
+          'THD measures how much signal energy has shifted out of the fundamental and into higher-order harmonics. A low figure means the transmitted waveform keeps its shape; a high one means distortion and lost clarity.',
+      },
+      {
+        src: '/projects/amplifier/slide-19.webp',
+        caption:
+          'How the filter does it: at high frequencies the inductors present high impedance and block, while the capacitors look like shorts to ground. Together the network passes the wanted band and attenuates the harmonics above it.',
+      },
+      {
+        src: '/projects/amplifier/slide-20.webp',
+        caption:
+          'Measured two ways. An LTSpice FFT with an ideal 1 Vpp, 14 MHz input gave 2.4% THD — the fundamental passing at magnitude 1, the second and third attenuated. The assembled PCB, measured with a Python script, came in at 0.58%.',
+      },
+      {
+        src: '/projects/amplifier/slide-21.webp',
+        caption:
+          'The filter removes the frequencies that were contributing harmonics, as designed.',
+      },
+      {
+        src: '/projects/amplifier/slide-22.webp',
+        caption:
+          'Requirement 2: met.',
+      },
+      {
+        src: '/projects/amplifier/slide-23.webp',
+        caption:
+          'Requirement 3 — 1–10 W of continuous output into a 50 Ω load. At least 1 W so the transmission carries reliably; under 10 W to keep the output in a safe range for the equipment.',
+      },
+      {
+        src: '/projects/amplifier/slide-24.webp',
+        caption:
+          'Closing the switch pushes current through the inductor, storing magnetic energy; opening it releases that energy through the filter into the load, acting as a second source alongside the 12 V supply. Simulation gave 20 V peaks — about 4 W into 50 Ω.',
+      },
+      {
+        src: '/projects/amplifier/slide-25.webp',
+        caption:
+          'On the physical PCB the output across the 50 Ω load was badly behaved, with occasional 102 mV peaks. Roughly 0.2 mW of inconsistent power, against a 1 W floor.',
+      },
+      {
+        src: '/projects/amplifier/slide-26.webp',
+        caption:
+          'Root cause. Rise and fall times of 6.5 ns and 4.5 ns were fine for 14 MHz — the oversight was the gate driver’s 45 ns internal propagation delay, nearly 63% of the switching cycle. The MOSFETs switched late and sat between ON and OFF, collapsing the output swing and drawing so much current the supply never held 12 V; it averaged 3.9 V.',
+      },
+      {
+        src: '/projects/amplifier/slide-27.webp',
+        caption:
+          'And the wiring. A generic gate driver has one output pin that pulls the gate both high and low; ours splits it into OUT_SRC and OUT_SNK. Only OUT_SRC was connected — the pin that closes the switch — so nothing could open it again.',
+      },
+      {
+        src: '/projects/amplifier/slide-28.webp',
+        caption:
+          'Walking the chain stage by stage and scoping each boundary: 1 Vpp in, 4.5–5 V out of the comparator, then into the gate driver. That is what localized where the signal died.',
+      },
+      {
+        src: '/projects/amplifier/slide-29.webp',
+        caption:
+          'Requirement 3: not met on this iteration of the PCB — with the cause identified rather than left open.',
+      },
+      {
+        src: '/projects/amplifier/slide-30.webp',
+        caption:
+          'All three requirements side by side: frequency and distortion met, output power not.',
+      },
+      {
+        src: '/projects/amplifier/slide-31.webp',
+        caption:
+          'Full radio integration was not attempted, since the power requirement was unmet. Instead the filter was tested on its own — a distorted signal in, a clean sine out — which confirmed it worked and pointed the fault at the amplifier stage.',
+      },
+      {
+        src: '/projects/amplifier/slide-32.webp',
+        caption:
+          'Three faults found across days of debugging: J13/J14 oriented backwards, bridged with M–F jumpers; a TLV1831 comparator whose open-drain output could only pull low, swapped for the push-pull TLV1841; and a stray 50 Ω footprint breaking the filter-to-output connection, closed with solder.',
+      },
+      {
+        src: '/projects/amplifier/slide-33.webp',
+        caption:
           'The fix: attach OUT_SNK to the MOSFET gates so they can be pulled low, wired to the datasheet reference, with the gate resistor sized from R = V_drive · t_rise / Qg.',
+      },
+      {
+        src: '/projects/amplifier/slide-34.webp',
+        caption:
+          'What we would do differently: assemble and test in stages rather than all at once, and add test points and LED indicators between stages. Either would have isolated the voltage drop in the amplifier stage far earlier.',
+      },
+      {
+        src: '/projects/amplifier/slide-35.webp',
+        caption:
+          'Clean transmission quality and correct frequency operation; the gate driving stage is what needs work to reach full output power.',
       },
     ],
   },
