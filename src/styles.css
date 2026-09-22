@@ -1399,3 +1399,310 @@ footer h2 {
     height: 40px;
   }
 }
+
+/* ==========================================================================
+   Games
+   ========================================================================== */
+
+.games {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.games-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.games-tab {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  padding: 6px 14px;
+  cursor: pointer;
+}
+
+.games-tab:hover {
+  border-color: var(--line-strong);
+  color: var(--ink);
+}
+
+.games-tab.is-current {
+  color: var(--copper);
+  border-color: var(--copper);
+  background: var(--copper-wash);
+}
+
+.games-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--copper);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+.games-blurb {
+  font-size: 15px;
+  color: var(--muted);
+  max-width: 62ch;
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.game-task {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.game-task strong {
+  font-family: var(--mono);
+  font-size: 15px;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.game-step {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.game-muted {
+  color: var(--faint);
+  font-size: 13px;
+}
+
+.game-status {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.game-btn {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--copper);
+  background: transparent;
+  border: 1px solid var(--copper);
+  border-radius: var(--radius);
+  padding: 5px 12px;
+  cursor: pointer;
+}
+
+.game-btn:hover {
+  background: var(--copper-wash);
+}
+
+/* ---- gate puzzle ---- */
+
+.gate-rig {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+
+.gate-inputs,
+.gate-slots {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.gate-inv,
+.gate-slot {
+  font-family: var(--mono);
+  background: var(--ground);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 8px 12px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  align-items: flex-start;
+  color: var(--ink);
+}
+
+.gate-inv {
+  min-width: 56px;
+  font-size: 15px;
+}
+
+.gate-inv.is-on {
+  border-color: var(--via);
+  color: var(--via);
+}
+
+.gate-inv-tag,
+.gate-slot-hint {
+  font-size: 10px;
+  color: var(--faint);
+  letter-spacing: 0.04em;
+}
+
+.gate-slot-name {
+  font-size: 15px;
+  color: var(--copper);
+}
+
+.gate-slot:hover,
+.gate-inv:hover {
+  border-color: var(--line-strong);
+}
+
+.tt {
+  border-collapse: collapse;
+  font-family: var(--mono);
+  font-size: 12px;
+  width: auto;
+  /* Without this the table stretches to the flex column's full width and the
+     columns drift metres apart. */
+  align-self: flex-start;
+}
+
+.tt th {
+  text-align: left;
+  padding: 5px 14px 5px 0;
+  color: var(--faint);
+  font-weight: 400;
+  border-bottom: 1px solid var(--line);
+}
+
+.tt td {
+  padding: 4px 14px 4px 0;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.tt tr.is-ok td:last-child {
+  color: var(--copper);
+}
+
+.tt tr.is-bad td:last-child {
+  color: var(--via);
+  font-weight: 500;
+}
+
+/* ---- bit drill ---- */
+
+.drill {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px;
+  background: var(--ground);
+  transition: border-color 0.15s ease;
+}
+
+.drill.is-ok {
+  border-color: var(--copper);
+}
+
+.drill-q {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 140px;
+}
+
+.drill-value {
+  font-family: var(--mono);
+  font-size: 24px;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+}
+
+.drill-prompt {
+  font-size: 12px;
+  color: var(--faint);
+}
+
+.drill-input {
+  flex: 1 1 180px;
+  min-width: 0;
+  font-family: var(--mono);
+  font-size: 18px;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 9px 12px;
+}
+
+.drill-input:focus {
+  outline: 2px solid var(--copper);
+  outline-offset: 1px;
+}
+
+.drill-meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.drill-clock {
+  font-family: var(--mono);
+  font-size: 15px;
+  color: var(--copper);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- snake ---- */
+
+.vga {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.vga canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  image-rendering: pixelated;
+}
+
+.vga-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  background: rgba(11, 15, 26, 0.72);
+}
+
+.vga-dead {
+  font-family: var(--mono);
+  font-size: 14px;
+  color: #e9e9f0;
+}
+
+.game-controls {
+  font-family: var(--mono);
+}

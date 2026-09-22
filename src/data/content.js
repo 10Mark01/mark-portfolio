@@ -549,6 +549,30 @@ export const offTheClock = {
   ],
 };
 
+/**
+ * Mini games. `id` must match a key in the PANELS map in Games.jsx — an id
+ * with no panel renders the blurb and nothing else, silently.
+ */
+export const games = [
+  {
+    id: 'gates',
+    name: 'Gate puzzle',
+    blurb:
+      'Pick gates and inverters until your output column matches the target. Five levels, ending at a full-adder sum.',
+  },
+  {
+    id: 'bits',
+    name: 'Bit drill',
+    blurb: 'Binary and hex conversion against a 60-second clock. Best score is kept in your browser.',
+  },
+  {
+    id: 'snake',
+    name: 'Snake',
+    blurb:
+      'Snake on a 320 \u00d7 240 framebuffer scaled 2\u00d7 with nearest-neighbour — the same geometry as the DE1-SoC simulator above.',
+  },
+];
+
 export const footer = {
   heading: 'Let’s talk.',
   body:

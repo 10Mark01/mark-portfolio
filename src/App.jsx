@@ -20,12 +20,14 @@ import { Section } from './components/Section.jsx';
 import { ExperienceCard } from './components/ExperienceCard.jsx';
 import { ProjectCard } from './components/ProjectCard.jsx';
 import { ParametersTable } from './components/ParametersTable.jsx';
+import { Games } from './components/Games.jsx';
 
 const SECTIONS = [
+  { id: 'about', label: 'About' },
   { id: 'experience', label: 'Experience' },
   { id: 'projects', label: 'Projects' },
   { id: 'parameters', label: 'Skills' },
-  { id: 'about', label: 'About' },
+  { id: 'games', label: 'Games' },
   { id: 'contact', label: 'Contact' },
 ];
 
@@ -64,7 +66,7 @@ export default function App() {
 
   return (
     <div className="page">
-      <a className="skip" href="#experience">
+      <a className="skip" href="#about">
         Skip to content
       </a>
 
@@ -85,30 +87,6 @@ export default function App() {
           </button>
         </div>
       )}
-
-      {visibleExperience.length > 0 && (
-        <Section id="experience" title="Experience" count={pad(visibleExperience.length)}>
-          <div className="exp-list">
-            {visibleExperience.map((item) => (
-              <ExperienceCard key={item.id} item={item} />
-            ))}
-          </div>
-        </Section>
-      )}
-
-      {visibleProjects.length > 0 && (
-        <Section id="projects" title="Projects" count={pad(visibleProjects.length)}>
-          <div className="projects">
-            {visibleProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
-            ))}
-          </div>
-        </Section>
-      )}
-
-      <Section id="parameters" title="Skills">
-        <ParametersTable />
-      </Section>
 
       <Section id="about" title="About">
         <div className="about-lede">
@@ -164,6 +142,34 @@ export default function App() {
             />
           </figure>
         )}
+      </Section>
+
+      {visibleExperience.length > 0 && (
+        <Section id="experience" title="Experience" count={pad(visibleExperience.length)}>
+          <div className="exp-list">
+            {visibleExperience.map((item) => (
+              <ExperienceCard key={item.id} item={item} />
+            ))}
+          </div>
+        </Section>
+      )}
+
+      {visibleProjects.length > 0 && (
+        <Section id="projects" title="Projects" count={pad(visibleProjects.length)}>
+          <div className="projects">
+            {visibleProjects.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))}
+          </div>
+        </Section>
+      )}
+
+      <Section id="parameters" title="Skills">
+        <ParametersTable />
+      </Section>
+
+      <Section id="games" title="Games">
+        <Games />
       </Section>
 
       <footer id="contact">
