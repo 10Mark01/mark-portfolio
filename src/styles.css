@@ -410,13 +410,6 @@ h3 {
   pointer-events: none;
 }
 
-.block-sub {
-  font-family: var(--mono);
-  font-size: 8px;
-  letter-spacing: 0.5px;
-  fill: var(--faint);
-  pointer-events: none;
-}
 
 .die-mark {
   font-family: var(--mono);

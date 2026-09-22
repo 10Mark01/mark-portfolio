@@ -38,11 +38,11 @@ export const profile = {
  * inside the core boundary (32,32 to 528,164) or they overlap the pad ring.
  */
 export const blocks = [
-  { id: 'signoff',  label: 'SIGNOFF',  sub: 'LINT · CDC · SYNTH',   x: 48,  y: 46,  w: 150, h: 102 },
-  { id: 'rtl',      label: 'RTL',      sub: 'VERILOG · FPGA',       x: 214, y: 46,  w: 146, h: 46  },
-  { id: 'embedded', label: 'EMBEDDED', sub: 'STM32 · ESP32 · C',    x: 214, y: 102, w: 146, h: 46  },
-  { id: 'pcb',      label: 'PCB',      sub: 'ALTIUM · LTSPICE',     x: 376, y: 46,  w: 136, h: 46  },
-  { id: 'ml',       label: 'ML / SW',  sub: 'PYTORCH · C++',        x: 376, y: 102, w: 136, h: 46  },
+  { id: 'signoff',  label: 'VERIFICATION',     x: 48,  y: 46,  w: 150, h: 102 },
+  { id: 'rtl',      label: 'DIGITAL DESIGN',   x: 214, y: 46,  w: 146, h: 46  },
+  { id: 'embedded', label: 'EMBEDDED SYSTEMS', x: 214, y: 102, w: 146, h: 46  },
+  { id: 'pcb',      label: 'ANALOG HARDWARE',  x: 376, y: 46,  w: 136, h: 46  },
+  { id: 'ml',       label: 'SOFTWARE',         x: 376, y: 102, w: 136, h: 46  },
 ];
 
 /** Copper routing between blocks. Decoration — edit or delete freely. */

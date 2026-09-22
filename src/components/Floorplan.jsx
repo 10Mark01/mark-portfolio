@@ -12,6 +12,30 @@ import { blocks, traces, vias } from '../data/content.js';
  * Accessibility note: an SVG <g> gets no keyboard behaviour for free, so each
  * block carries role/tabIndex/aria-pressed and handles Enter and Space itself.
  */
+/**
+ * Long labels wrap onto a second line, broken at the space nearest the middle
+ * so neither half overhangs its block. Kept here rather than in content.js so
+ * the data stays one readable string per block — `label` is also what the
+ * filter bar and the aria-label read out.
+ */
+function labelLines(text) {
+  if (text.length <= 12) return [text];
+  const words = text.split(' ');
+  if (words.length === 1) return [text];
+  let at = 1;
+  let best = Infinity;
+  for (let i = 1; i < words.length; i += 1) {
+    const gap = Math.abs(
+      words.slice(0, i).join(' ').length - words.slice(i).join(' ').length
+    );
+    if (gap < best) {
+      best = gap;
+      at = i;
+    }
+  }
+  return [words.slice(0, at).join(' '), words.slice(at).join(' ')];
+}
+
 function FloorplanBase({ activeId, onSelect }) {
   const handleKeyDown = (event, id) => {
     if (event.key === 'Enter' || event.key === ' ') {
@@ -79,22 +103,21 @@ function FloorplanBase({ activeId, onSelect }) {
               />
               {/* Labels centre on the block rather than sitting a fixed
                   distance from its top, so a tall block stays balanced. */}
-              <text
-                className="block-label"
-                x={block.x + block.w / 2}
-                y={block.y + block.h / 2 - 2}
-                textAnchor="middle"
-              >
-                {block.label}
-              </text>
-              <text
-                className="block-sub"
-                x={block.x + block.w / 2}
-                y={block.y + block.h / 2 + 11}
-                textAnchor="middle"
-              >
-                {block.sub}
-              </text>
+              {labelLines(block.label).map((line, index, all) => (
+                <text
+                  key={line}
+                  className="block-label"
+                  x={block.x + block.w / 2}
+                  y={
+                    all.length === 1
+                      ? block.y + block.h / 2 + 4
+                      : block.y + block.h / 2 - 2 + index * 12
+                  }
+                  textAnchor="middle"
+                >
+                  {line}
+                </text>
+              ))}
             </g>
           );
         })}
