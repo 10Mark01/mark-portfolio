@@ -84,9 +84,8 @@ export const experience = [
     domains: ['signoff', 'rtl', 'ml'],
     bullets: [
       'Own the team’s Tcl async-FIFO extraction script, run under Synopsys Design Compiler. It reads RTL alongside build-time feature flags to classify edge cases correctly — continuous streaming phase-adjustment FIFOs among them — and produces per-tile reference lists, pinned to a changelist, that partner teams check for post-synthesis netlist equivalence and for pointer race conditions across gray-code crossings.',
-      'Triage RTL lint, CDC and compile-elaborate violations at the core level across concurrent PCIe SoC programs, driving root cause with the designers and usually proposing the fix. Maintain the waiver log that goes with it.',
-      'Generate SRAM memories and diff genIP lists across releases, running multi-stage distributed builds (compile → lib2db → NDM → ECC wrapper → publish). Added log-parsing validity checks after finding the tool exits 0 even on failure.',
-      'Analyzed area, timing and power drift between IP releases, reconstructing area from datasheet specs for macros the compiler reported as infinite — and characterized my own estimate’s error at ~4% plain, ~19% with ECC, because an estimate you can’t bound isn’t worth much.',
+      'Triage RTL lint, CDC and compile-elaborate violations at the core level across concurrent PCIe SoC programs, driving root cause with the designers and usually proposing the fix.',
+      'Drove the design waiver count toward zero — when one appeared, tracked down the owner and pushed for either a fix to the underlying violation or a documented sign-off taking responsibility that it was safe to keep. Third-party IP is the real exception: a rule written for our design style doesn’t always apply to someone else’s, so some of those waivers are the correct call.',
       'Replaced a manual connectivity-extract → Excel → hand-drawn diagram workflow with an automated Verilog parser → Postgres → FastAPI → React Flow pipeline, built end to end and verified against SQL at every hop.',
     ],
     stack: ['Tcl', 'Design Compiler', 'SpyGlass', 'Questa CDC', 'VCS', 'Perforce', 'React Flow'],
