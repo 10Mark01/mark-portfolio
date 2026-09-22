@@ -1,6 +1,8 @@
 import { Slideshow } from './Slideshow.jsx';
 import { PhysicsSim } from './PhysicsSim.jsx';
 import { VideoDemo } from './VideoDemo.jsx';
+import { PaperLink } from './PaperLink.jsx';
+import { renderEmphasis } from '../lib/richText.jsx';
 
 /**
  * One project entry.
@@ -13,10 +15,13 @@ import { VideoDemo } from './VideoDemo.jsx';
  * `slides` is optional too — give a project an array of `{ src, caption }`
  * and the card renders a deck viewer in place of the single image. `sim`
  * points at a runnable build and takes precedence over both. `video` is
- * independent — a demo clip renders above any of them.
+ * independent — a demo clip renders above any of them, and `doc` attaches a
+ * written report below the body.
  */
 export function ProjectCard({ project }) {
-  const { tag, date, title, result, body, stack, href, image, slides, sim, video, todo } = project;
+  const {
+    tag, date, title, result, body, stack, href, image, slides, sim, video, doc, todo,
+  } = project;
 
   return (
     <article className={`proj${todo ? ' is-todo' : ''}`}>
@@ -67,7 +72,17 @@ export function ProjectCard({ project }) {
           )
         )}
 
-        <p className="detail">{body}</p>
+        <p className="detail">{renderEmphasis(body)}</p>
+
+        {doc && (
+          <PaperLink
+            href={doc.href}
+            thumb={doc.thumb}
+            label={doc.label}
+            title={doc.title}
+            meta={doc.meta}
+          />
+        )}
 
         {stack?.length > 0 && (
           <ul className="stack">
