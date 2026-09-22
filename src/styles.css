@@ -270,6 +270,19 @@ h3 {
   border-color: var(--copper);
 }
 
+.creds {
+  margin-top: 10px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.02em;
+  color: var(--faint);
+}
+
+.creds .sep {
+  margin: 0 8px;
+  color: var(--line-strong);
+}
+
 .spec {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
@@ -933,6 +946,7 @@ footer h2 {
   position: relative;
   aspect-ratio: 1400 / 790;
   background: var(--die);
+  cursor: pointer;
 }
 
 .deck-slide {
@@ -948,6 +962,30 @@ footer h2 {
 .deck-slide.is-current {
   opacity: 1;
 }
+
+/* One clickable segment per slide. Scales to a 35-slide deck without
+   fetching a single thumbnail. */
+.deck-track {
+  display: flex;
+  gap: 2px;
+  padding: 6px 8px 0;
+  background: var(--surface);
+}
+
+.deck-seg {
+  flex: 1 1 0;
+  height: 6px;
+  min-width: 4px;
+  padding: 0;
+  background: var(--line);
+  border: none;
+  border-radius: 1px;
+  cursor: pointer;
+  transition: background 120ms ease;
+}
+
+.deck-seg:hover { background: var(--line-strong); }
+.deck-seg.is-on { background: var(--copper); }
 
 .deck-bar {
   display: flex;
@@ -991,14 +1029,9 @@ footer h2 {
   transition: color 120ms ease, border-color 120ms ease;
 }
 
-.deck-nav:hover:not(:disabled) {
+.deck-nav:hover {
   color: var(--copper);
   border-color: var(--copper);
-}
-
-.deck-nav:disabled {
-  opacity: 0.35;
-  cursor: default;
 }
 
 /* ---------------------------------------------------------------------------

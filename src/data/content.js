@@ -10,12 +10,16 @@
 
 export const profile = {
   name: 'Mark Samuel',
-  eyebrow: ['Electrical Engineering', 'University of Toronto', 'Class of 2T8'],
+  eyebrow: ['Electrical & Computer Engineering', 'University of Toronto', 'Class of 2T8'],
   lede:
-    'Electrical engineering at the University of Toronto. Silicon implementation on AMD’s PCIe subsystem: lint, CDC, synthesis, memory compilers.',
+    'Dean\'s List engineer at the University of Toronto, currently on AMD’s PCIe IPE team. Looking for hardware, ASIC and silicon roles for Winter and Summer 2027.',
+  credentials: [
+    'Minors in AI/ML and Robotics/Mechatronics',
+    'Certificate in Religious Studies',
+  ],
   spec: [
-    { label: 'Seeking', value: 'Summer 2027', highlight: true },
-    { label: 'Now', value: 'AMD — PCIe silicon' },
+    { label: 'Seeking', value: 'Winter & Summer 2027', highlight: true },
+    { label: 'Now', value: 'AMD — PCIe IPE' },
     { label: 'Focus', value: 'RTL · Signoff · DV' },
     { label: 'Based', value: 'Toronto, ON' },
     { label: 'Graduating', value: 'May 2028' },
@@ -430,7 +434,7 @@ export const projects = [
 ];
 
 export const about = [
-  'Electrical engineering at the University of Toronto, with minors in AI/ML and robotics, graduating May 2028. At AMD I work on silicon implementation for a PCIe subsystem: lint, CDC, compile-elaborate, synthesis and memory compiler flows. I’ve tutored math, physics and chemistry since high school. I’m looking for a summer 2027 internship in RTL design, signoff or DV.',
+  'Electrical & Computer Engineering at the University of Toronto, with minors in AI/ML and Robotics/Mechatronics, a certificate in religious studies, and a place on the Dean\'s List. Graduating May 2028. At AMD I work on the PCIe IPE team: lint, CDC, compile-elaborate, synthesis and memory compiler flows. I’ve tutored math, physics and chemistry since high school. I’m looking for hardware, ASIC and silicon roles for Winter and Summer 2027.',
 ];
 
 /** Skills. Grouped the way an interviewer would ask about them. */

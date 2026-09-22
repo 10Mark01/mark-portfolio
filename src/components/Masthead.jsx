@@ -19,6 +19,17 @@ export function Masthead({ theme, onToggleTheme }) {
       <h1>{profile.name}</h1>
       <p className="lede">{profile.lede}</p>
 
+      {profile.credentials?.length > 0 && (
+        <p className="creds">
+          {profile.credentials.map((item, index) => (
+            <span key={item}>
+              {index > 0 && <span className="sep" aria-hidden="true">·</span>}
+              {item}
+            </span>
+          ))}
+        </p>
+      )}
+
       <dl className="spec">
         {profile.spec.map((item) => (
           <div key={item.label}>

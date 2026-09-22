@@ -7,21 +7,30 @@ import { useCallback, useEffect, useRef, useState } from 'react';
  * `{ src, caption }`, where `src` is the 1400px WebP and a matching
  * `@0.5x` file is assumed to sit beside it for narrow screens.
  *
- * Only the current slide and its immediate neighbours are given a real
- * `src`, so a seven-slide deck costs one image on load rather than seven.
- * Arrow keys work once the viewer has focus — not globally, or they would
- * fight the page scroll.
+ * Navigation, in rough order of how often it gets used:
+ *   - click the slide itself to advance
+ *   - the segment bar to jump anywhere directly, which matters once a deck
+ *     runs to thirty-odd slides and stepping through is not viable
+ *   - arrow buttons, wrapping at both ends
+ *   - arrow keys once the viewer has focus, plus Home and End
+ *
+ * Only the current slide and its immediate neighbours carry a real `src`.
+ * Because the ends wrap, the last slide counts as a neighbour of the first.
  */
 export function Slideshow({ slides, label }) {
   const [index, setIndex] = useState(0);
   const frameRef = useRef(null);
 
   const count = slides.length;
-  const clamp = useCallback((n) => Math.min(Math.max(n, 0), count - 1), [count]);
 
+  /* Wrapping means -1 lands on the last slide and count lands on the first. */
   const go = useCallback(
-    (n) => setIndex((current) => clamp(typeof n === 'function' ? n(current) : n)),
-    [clamp],
+    (n) =>
+      setIndex((current) => {
+        const next = typeof n === 'function' ? n(current) : n;
+        return ((next % count) + count) % count;
+      }),
+    [count],
   );
 
   useEffect(() => {
@@ -29,18 +38,21 @@ export function Slideshow({ slides, label }) {
     if (!frame) return undefined;
 
     const onKey = (event) => {
-      if (event.key === 'ArrowLeft') {
-        event.preventDefault();
-        go((i) => i - 1);
-      } else if (event.key === 'ArrowRight') {
-        event.preventDefault();
-        go((i) => i + 1);
-      }
+      const keys = {
+        ArrowLeft: () => go((i) => i - 1),
+        ArrowRight: () => go((i) => i + 1),
+        Home: () => go(0),
+        End: () => go(count - 1),
+      };
+      const action = keys[event.key];
+      if (!action) return;
+      event.preventDefault();
+      action();
     };
 
     frame.addEventListener('keydown', onKey);
     return () => frame.removeEventListener('keydown', onKey);
-  }, [go]);
+  }, [go, count]);
 
   const current = slides[index];
 
@@ -53,10 +65,14 @@ export function Slideshow({ slides, label }) {
       aria-roledescription="slideshow"
       aria-label={label}
     >
-      <div className="deck-stage">
+      <div
+        className="deck-stage"
+        onClick={() => go((i) => i + 1)}
+        title="Click for the next slide"
+      >
         {slides.map((slide, i) => {
-          // Render the neighbours so a click swaps an already-decoded image.
-          const near = Math.abs(i - index) <= 1;
+          const distance = Math.abs(i - index);
+          const near = distance <= 1 || distance === count - 1;
           const base = slide.src.replace(/\.webp$/, '');
 
           return (
@@ -77,12 +93,28 @@ export function Slideshow({ slides, label }) {
         })}
       </div>
 
+      {/* One segment per slide. Cheaper than a thumbnail rail — no images to
+          fetch — while still allowing a jump straight to any slide. */}
+      {count > 3 && (
+        <div className="deck-track">
+          {slides.map((slide, i) => (
+            <button
+              key={slide.src}
+              type="button"
+              className={`deck-seg${i === index ? ' is-on' : ''}`}
+              onClick={() => go(i)}
+              aria-label={`Go to slide ${i + 1}`}
+              aria-current={i === index ? 'true' : undefined}
+            />
+          ))}
+        </div>
+      )}
+
       <figcaption className="deck-bar">
         <button
           type="button"
           className="deck-nav"
           onClick={() => go((i) => i - 1)}
-          disabled={index === 0}
           aria-label="Previous slide"
         >
           ←
@@ -100,7 +132,6 @@ export function Slideshow({ slides, label }) {
           type="button"
           className="deck-nav"
           onClick={() => go((i) => i + 1)}
-          disabled={index === count - 1}
           aria-label="Next slide"
         >
           →
