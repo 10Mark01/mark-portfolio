@@ -1308,3 +1308,94 @@ footer h2 {
     animation-duration: 0.01ms !important;
   }
 }
+
+/* ==========================================================================
+   About photography
+   ========================================================================== */
+
+.about-lede {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.portrait {
+  width: 180px;
+  height: auto;
+  aspect-ratio: 880 / 1256;
+  object-fit: cover;
+  display: block;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.shot {
+  margin-top: 22px;
+}
+
+.shot img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+@media (max-width: 700px) {
+  .about-lede {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .portrait {
+    width: 140px;
+  }
+}
+
+/* ==========================================================================
+   Employer logos
+   ========================================================================== */
+
+/* The plaque stays white in both themes: AMD and UTRA are black-on-white
+   marks that would disappear on the dark surface, and inverting them would
+   wreck UTRA's blue and Enwave's orange. A light tile is the only treatment
+   that keeps all three brand-correct. */
+.exp-id {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+/* Plain block, NOT grid: inside a grid or flex track sized `auto`, the
+   image's percentage height resolves to auto and portrait logos overflow.
+   A block box with a definite height gives `height: 100%` something real
+   to resolve against, and object-fit does the centering. */
+.exp-logo {
+  flex: none;
+  display: block;
+  width: 76px;
+  height: 46px;
+  padding: 5px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+/* width/height 100% + object-fit, NOT max-width/max-height: a percentage
+   max-height on a grid item resolves against an auto-sized track, so it is
+   ignored and portrait logos (AMD, UTRA) overflow the plaque. */
+.exp-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+@media (max-width: 700px) {
+  .exp-logo {
+    width: 64px;
+    height: 40px;
+  }
+}

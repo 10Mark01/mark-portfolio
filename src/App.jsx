@@ -5,6 +5,7 @@ import {
   experience,
   footer,
   offTheClock,
+  portrait,
   profile,
   projects,
   teaching,
@@ -110,10 +111,23 @@ export default function App() {
       </Section>
 
       <Section id="about" title="About">
-        <div className="prose">
-          {about.map((paragraph) => (
-            <p key={paragraph.slice(0, 40)}>{renderEmphasis(paragraph)}</p>
-          ))}
+        <div className="about-lede">
+          <img
+            className="portrait"
+            src={portrait.src}
+            srcSet={`${portrait.small} ${portrait.width / 2}w, ${portrait.src} ${portrait.width}w`}
+            sizes="(max-width: 700px) 140px, 180px"
+            width={portrait.width}
+            height={portrait.height}
+            alt={portrait.alt}
+            loading="lazy"
+            decoding="async"
+          />
+          <div className="prose">
+            {about.map((paragraph) => (
+              <p key={paragraph.slice(0, 40)}>{renderEmphasis(paragraph)}</p>
+            ))}
+          </div>
         </div>
 
         <div className="two" style={{ marginTop: '22px' }}>
@@ -135,6 +149,21 @@ export default function App() {
             ))}
           </ul>
         </div>
+
+        {offTheClock.photo && (
+          <figure className="shot">
+            <img
+              src={offTheClock.photo.src}
+              srcSet={`${offTheClock.photo.small} ${offTheClock.photo.width / 2}w, ${offTheClock.photo.src} ${offTheClock.photo.width}w`}
+              sizes="(max-width: 860px) 100vw, 860px"
+              width={offTheClock.photo.width}
+              height={offTheClock.photo.height}
+              alt={offTheClock.photo.alt}
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        )}
       </Section>
 
       <footer id="contact">

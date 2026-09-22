@@ -4,20 +4,27 @@
  * so it gets the wider measure and the bullets rather than a summary.
  */
 export function ExperienceCard({ item }) {
-  const { role, team, org, location, period, bullets, stack } = item;
+  const { role, team, org, location, period, bullets, stack, logo } = item;
 
   return (
     <article className="exp">
       <header className="exp-head">
-        <div>
-          <h3>
-            {role}
-            {team && <span className="exp-team"> · {team}</span>}
-          </h3>
-          <p className="exp-org">
-            <strong>{org}</strong>
-            <span className="exp-loc"> — {location}</span>
-          </p>
+        <div className="exp-id">
+          {logo && (
+            <span className="exp-logo">
+              <img src={logo.src} alt={logo.alt} loading="lazy" decoding="async" />
+            </span>
+          )}
+          <div>
+            <h3>
+              {role}
+              {team && <span className="exp-team"> · {team}</span>}
+            </h3>
+            <p className="exp-org">
+              <strong>{org}</strong>
+              <span className="exp-loc"> — {location}</span>
+            </p>
+          </div>
         </div>
         <p className="exp-period">{period}</p>
       </header>

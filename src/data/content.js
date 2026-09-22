@@ -75,6 +75,7 @@ export const vias = [
 export const experience = [
   {
     id: 'amd',
+    logo: { src: '/logos/amd.webp', alt: 'AMD' },
     role: 'Silicon Implementation & Integration Intern',
     team: 'PCIe Subsystem',
     org: 'AMD',
@@ -92,6 +93,7 @@ export const experience = [
   },
   {
     id: 'robotics',
+    logo: { src: '/logos/utra.webp', alt: 'University of Toronto Robotics Association' },
     role: 'Team Leader — Battle Bots',
     org: 'UofT Robotics Association',
     location: 'Toronto, ON',
@@ -106,6 +108,7 @@ export const experience = [
   },
   {
     id: 'enwave',
+    logo: { src: '/logos/enwave.webp', alt: 'Enwave Energy Corporation' },
     role: 'Operations Intern',
     org: 'Enwave Energy Corporation',
     location: 'Toronto, ON',
@@ -509,9 +512,31 @@ export const teaching = [
   },
 ];
 
+/**
+ * About-section photography. Both crops come from photos Mark supplied; the
+ * portrait is cropped out of a family photo, so keep the frame tight enough
+ * that nobody else is in it if you ever re-crop.
+ *
+ * Each image ships at 1x and 0.5x, matching the deck-slide naming convention.
+ */
+export const portrait = {
+  src: '/about/portrait.webp',
+  small: '/about/portrait@0.5x.webp',
+  width: 880,
+  height: 1256,
+  alt: 'Mark Samuel',
+};
+
 export const offTheClock = {
   body:
     'I cook and bake most days, keep a garden, and read a lot — history and religion academically, though I’m not religious myself. I swim, hike, play basketball and lose at board games. First aid certified.',
+  photo: {
+    src: '/about/offtheclock.webp',
+    small: '/about/offtheclock@0.5x.webp',
+    width: 1600,
+    height: 899,
+    alt: 'Mark with a bike on a waterfront path at sunset, sailboats moored behind him',
+  },
   chips: [
     'Cooking & baking',
     'Gardening',
