@@ -20,13 +20,12 @@ export const profile = {
   spec: [
     { label: 'Seeking', value: 'Winter & Summer 2027', highlight: true },
     { label: 'Now', value: 'AMD — PCIe IPE' },
-    { label: 'Focus', value: 'RTL · Signoff · DV' },
+    { label: 'Focus', value: 'ASIC · RTL · Signoff' },
     { label: 'Based', value: 'Toronto, ON' },
     { label: 'Graduating', value: 'May 2028' },
   ],
   links: [
     { label: 'mark.samuel@mail.utoronto.ca', href: 'mailto:mark.samuel@mail.utoronto.ca' },
-    { label: 'github.com/10Mark01', href: 'https://github.com/10Mark01' },
     { label: 'linkedin.com/in/ms-ee', href: 'https://linkedin.com/in/ms-ee' },
     { label: 'Résumé (PDF)', href: '/resume.pdf' },
   ],
@@ -434,7 +433,7 @@ export const projects = [
 ];
 
 export const about = [
-  'Electrical & Computer Engineering at the University of Toronto, with minors in AI/ML and Robotics/Mechatronics, a certificate in religious studies, and a place on the Dean\'s List. Graduating May 2028. At AMD I work on the PCIe IPE team: lint, CDC, compile-elaborate, synthesis and memory compiler flows. I’ve tutored math, physics and chemistry since high school. I’m looking for hardware, ASIC and silicon roles for Winter and Summer 2027.',
+  'Electrical & Computer Engineering at the University of Toronto, with minors in AI/ML and Robotics/Mechatronics, a certificate in religious studies, and a place on the Dean\'s List. Graduating May 2028. At AMD I work on the PCIe IPE team: lint, CDC, compile-elaborate, synthesis and memory compiler flows. Outside that, RTL on FPGAs, PCB design and embedded C. I’m looking for hardware, ASIC and silicon roles for Winter and Summer 2027.',
 ];
 
 /** Skills. Grouped the way an interviewer would ask about them. */
@@ -488,33 +487,16 @@ export const parameters = [
 
 export const teaching = [
   {
-    label: 'Founded',
-    title: 'Peer tutoring club',
+    label: 'Also',
+    title: 'Tutoring',
     body:
-      'Started it at my high school and ran it through to graduation, matching students who were struggling with ones who weren’t.',
-  },
-  {
-    label: 'Teaching assistant',
-    title: 'Grade 11 physics',
-    body: 'Ran problem sessions and worked through questions with students who had stalled on them.',
-  },
-  {
-    label: 'Tutoring',
-    title: 'Math, physics, chemistry',
-    body:
-      'And I can hold my own in biology and English. It started as a way to earn money and became the part of the week I look forward to.',
-  },
-  {
-    label: 'Why it’s here',
-    title: 'Design work gets inherited',
-    body:
-      'Explaining a decision to someone who wasn’t in the room is the same skill whether they’re a student or the engineer who picks up your block next quarter.',
+      'Math, physics and chemistry since high school. Founded a peer tutoring club at my high school and ran it through to graduation, and TA’d grade 11 physics.',
   },
 ];
 
 export const offTheClock = {
   body:
-    'I cook and bake most days, keep a garden, and read a lot — history and religion academically, though I’m not religious myself. I swim, hike, play basketball and lose at board games. First aid certified. Somewhere after graduation there’s a fork between staying in semiconductors and a master’s that ends in teaching, and I haven’t picked yet.',
+    'I cook and bake most days, keep a garden, and read a lot — history and religion academically, though I’m not religious myself. I swim, hike, play basketball and lose at board games. First aid certified.',
   chips: [
     'Cooking & baking',
     'Gardening',
