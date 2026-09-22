@@ -230,12 +230,64 @@ export const projects = [
     date: 'Jan 2025',
     domains: ['pcb'],
     title: 'Class D Power Amplifier & Low-Pass Filter',
-    result: '40 Vₓₓ output into a 16 MHz passive low-pass filter',
+    result: 'Two of three requirements met — and a root cause for the third',
     body:
-      'A Class D amplifier for an RF transmit chain. I explored BJT, comparator and MOSFET topologies in LTSpice and went with parallel MOSFETs to carry the current at frequency. Fabricated and tested a 2-layer board with ground planes and decoupling, hand-assembled the RF components, and wrote Python to automate the bandwidth, cutoff and waveform-integrity measurements off the bench instruments.',
+      'A Class D amplifier for an RF transmit chain. I explored BJT, comparator and MOSFET topologies in LTSpice and went with parallel MOSFETs to carry the current at frequency, fabricated and hand-assembled a 2-layer board with ground planes and decoupling, and wrote Python to automate the bandwidth, cutoff and waveform measurements off the bench instruments. Amplification across 8–16 MHz passed, and harmonic distortion came in at **0.58% against a 10% limit**. Output power did not clear its 1 W floor — and the more useful half of the work was finding out exactly why: a gate driver whose 45 ns propagation delay consumed 63% of the switching cycle, and an OUT_SNK pin never wired to the MOSFET gates, so they could be driven high but never pulled low. Both are specified fixes now. The deck walks the diagnosis.',
     stack: ['LTSpice', 'Altium', 'MOSFET', '2-layer PCB', 'Python'],
     image: null,
     href: null,
+    slides: [
+      {
+        src: '/projects/amplifier/slide-01.webp',
+        caption:
+          'The routed two-layer board beside the assembled article — hand-soldered, jumper wires and all.',
+      },
+      {
+        src: '/projects/amplifier/slide-02.webp',
+        caption:
+          'Requirement 3: 1–10 W of continuous output into a 50 Ω load. At least 1 W so the transmission carries reliably; under 10 W to keep the output in a safe range for the equipment.',
+      },
+      {
+        src: '/projects/amplifier/slide-03.webp',
+        caption:
+          'A Class D switching network. Closing the switch pushes current through the inductor, storing magnetic energy; opening it releases that energy through the filter into the load, acting as a second source alongside the 12 V supply. Simulation gave 20 V peaks — about 4 W into 50 Ω.',
+      },
+      {
+        src: '/projects/amplifier/slide-04.webp',
+        caption:
+          'On the physical PCB the output across the 50 Ω load was badly behaved, with occasional 102 mV peaks. Roughly 0.2 mW of inconsistent power, against a 1 W floor.',
+      },
+      {
+        src: '/projects/amplifier/slide-05.webp',
+        caption:
+          'Root cause. Rise and fall times of 6.5 ns and 4.5 ns were fine for 14 MHz — the oversight was the gate driver’s 45 ns internal propagation delay, nearly 63% of the switching cycle. The MOSFETs switched late and sat between ON and OFF, collapsing the output swing and drawing so much current the supply never held 12 V; it averaged 3.9 V.',
+      },
+      {
+        src: '/projects/amplifier/slide-06.webp',
+        caption:
+          'A generic gate driver has one output pin that pulls the gate both high and low. Ours splits it into OUT_SRC and OUT_SNK. We had wired only OUT_SRC — the pin that closes the switch — so nothing could open it again.',
+      },
+      {
+        src: '/projects/amplifier/slide-07.webp',
+        caption:
+          'Walking the chain stage by stage: 1 Vpp in, boosted to 4.5–5 V by the comparator, then into the gate driver. Scoping each boundary is what localized where the signal died.',
+      },
+      {
+        src: '/projects/amplifier/slide-08.webp',
+        caption:
+          'Reported as not met on this iteration of the PCB — with the cause identified rather than left open.',
+      },
+      {
+        src: '/projects/amplifier/slide-09.webp',
+        caption:
+          'Three faults found across days of debugging: J13/J14 oriented backwards, bridged with M–F jumpers; a TLV1831 comparator whose open-drain output could only pull low, swapped for the push-pull TLV1841; and a stray 50 Ω footprint breaking the filter-to-output connection, closed with solder.',
+      },
+      {
+        src: '/projects/amplifier/slide-10.webp',
+        caption:
+          'The fix: attach OUT_SNK to the MOSFET gates so they can be pulled low, wired to the datasheet reference, with the gate resistor sized from R = V_drive · t_rise / Qg.',
+      },
+    ],
   },
   {
     id: 'pianotiles',
