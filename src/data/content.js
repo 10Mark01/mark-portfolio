@@ -12,7 +12,7 @@ export const profile = {
   name: 'Mark Samuel',
   eyebrow: ['Electrical Engineering', 'University of Toronto', 'Class of 2T8'],
   lede:
-    'Electrical engineering at the University of Toronto, currently on the silicon implementation team for AMD’s PCIe subsystem. I work at the unglamorous end of chip design — lint, CDC, synthesis, memory compilers — and I like it there, because the feedback is honest.',
+    'Electrical engineering at the University of Toronto. Silicon implementation on AMD’s PCIe subsystem: lint, CDC, synthesis, memory compilers.',
   spec: [
     { label: 'Seeking', value: 'Summer 2027', highlight: true },
     { label: 'Now', value: 'AMD — PCIe silicon' },
@@ -24,7 +24,7 @@ export const profile = {
     { label: 'mark.samuel@mail.utoronto.ca', href: 'mailto:mark.samuel@mail.utoronto.ca' },
     { label: 'github.com/10Mark01', href: 'https://github.com/10Mark01' },
     { label: 'linkedin.com/in/ms-ee', href: 'https://linkedin.com/in/ms-ee' },
-    { label: 'Résumé (PDF)', href: '/resume.pdf', todo: true },
+    { label: 'Résumé (PDF)', href: '/resume.pdf' },
   ],
 };
 
@@ -430,9 +430,7 @@ export const projects = [
 ];
 
 export const about = [
-  'I was born in Egypt and moved to Canada when I was six, so Toronto is home and Cairo is where the rest of the family is. I’m an electrical engineering student at the University of Toronto, with minors in AI/ML and robotics, and I’ve spent the last stretch at AMD on the silicon implementation side of a PCIe subsystem.',
-  'What I like about signoff work is that it doesn’t let you be vague. A lint violation is real or it’s a waiver you have to justify to a designer. **An area estimate is worth exactly as much as your error bar on it** — which is why, when I rebuilt macro areas from datasheet specs, the number I actually reported was the ~4% and ~19% uncertainty around them.',
-  'The other half of me is a teacher. I founded a peer tutoring club in high school, TA’d a grade 11 physics class, and I’ve been tutoring math, physics and chemistry ever since. It made me careful about explanations — if I can’t say why something works, I don’t know it yet. That shows up in my waiver justifications more than anywhere else.',
+  'Electrical engineering at the University of Toronto, with minors in AI/ML and robotics, graduating May 2028. At AMD I work on silicon implementation for a PCIe subsystem: lint, CDC, compile-elaborate, synthesis and memory compiler flows. I’ve tutored math, physics and chemistry since high school. I’m looking for a summer 2027 internship in RTL design, signoff or DV.',
 ];
 
 /** Skills. Grouped the way an interviewer would ask about them. */
