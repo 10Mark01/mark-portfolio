@@ -4,11 +4,10 @@ import {
   blocks,
   experience,
   footer,
-  offTheClock,
+  aboutPhoto,
   portrait,
   profile,
   projects,
-  teaching,
 } from './data/content.js';
 import { useTheme } from './hooks/useTheme.js';
 import { useActiveSection } from './hooks/useActiveSection.js';
@@ -108,40 +107,18 @@ export default function App() {
           </div>
         </div>
 
-        <div className="two" style={{ marginTop: '22px' }}>
-          {teaching.map((item) => (
-            <div className="note" key={item.label}>
-              <p className="eyebrow">{item.label}</p>
-              <p>
-                <strong>{item.title}</strong> — {item.body}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        <div className="prose" style={{ marginTop: '22px' }}>
-          <p>{offTheClock.body}</p>
-          <ul className="chips">
-            {offTheClock.chips.map((chip) => (
-              <li key={chip}>{chip}</li>
-            ))}
-          </ul>
-        </div>
-
-        {offTheClock.photo && (
-          <figure className="shot">
-            <img
-              src={offTheClock.photo.src}
-              srcSet={`${offTheClock.photo.small} ${offTheClock.photo.width / 2}w, ${offTheClock.photo.src} ${offTheClock.photo.width}w`}
-              sizes="(max-width: 860px) 100vw, 860px"
-              width={offTheClock.photo.width}
-              height={offTheClock.photo.height}
-              alt={offTheClock.photo.alt}
-              loading="lazy"
-              decoding="async"
-            />
-          </figure>
-        )}
+        <figure className="shot">
+          <img
+            src={aboutPhoto.src}
+            srcSet={`${aboutPhoto.small} ${aboutPhoto.width / 2}w, ${aboutPhoto.src} ${aboutPhoto.width}w`}
+            sizes="(max-width: 860px) 100vw, 860px"
+            width={aboutPhoto.width}
+            height={aboutPhoto.height}
+            alt={aboutPhoto.alt}
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
       </Section>
 
       {visibleExperience.length > 0 && (

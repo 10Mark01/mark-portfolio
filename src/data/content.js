@@ -503,15 +503,6 @@ export const parameters = [
   },
 ];
 
-export const teaching = [
-  {
-    label: 'Also',
-    title: 'Tutoring',
-    body:
-      'Math, physics and chemistry since high school. Founded a peer tutoring club at my high school and ran it through to graduation, and TA’d grade 11 physics.',
-  },
-];
-
 /**
  * About-section photography. Both crops come from photos Mark supplied; the
  * portrait is cropped out of a family photo, so keep the frame tight enough
@@ -527,26 +518,12 @@ export const portrait = {
   alt: 'Mark Samuel',
 };
 
-export const offTheClock = {
-  body:
-    'I cook and bake most days, keep a garden, and read a lot — history and religion academically, though I’m not religious myself. I swim, hike, play basketball and lose at board games. First aid certified.',
-  photo: {
-    src: '/about/offtheclock.webp',
-    small: '/about/offtheclock@0.5x.webp',
-    width: 1600,
-    height: 899,
-    alt: 'Mark with a bike on a waterfront path at sunset, sailboats moored behind him',
-  },
-  chips: [
-    'Cooking & baking',
-    'Gardening',
-    'History',
-    'Swimming',
-    'Hiking',
-    'Basketball',
-    'Board games',
-    'Film',
-  ],
+export const aboutPhoto = {
+  src: '/about/offtheclock.webp',
+  small: '/about/offtheclock@0.5x.webp',
+  width: 1600,
+  height: 899,
+  alt: 'Mark with a bike on a waterfront path at sunset, sailboats moored behind him',
 };
 
 /**
