@@ -38,7 +38,7 @@ export const profile = {
  * inside the core boundary (32,32 to 528,164) or they overlap the pad ring.
  */
 export const blocks = [
-  { id: 'signoff',  label: 'VERIFICATION',     x: 48,  y: 46,  w: 150, h: 102 },
+  { id: 'signoff',  label: 'INTEGRATION & IMPLEMENTATION', x: 48,  y: 46,  w: 150, h: 102 },
   { id: 'rtl',      label: 'DIGITAL DESIGN',   x: 214, y: 46,  w: 146, h: 46  },
   { id: 'embedded', label: 'EMBEDDED SYSTEMS', x: 214, y: 102, w: 146, h: 46  },
   { id: 'pcb',      label: 'ANALOG HARDWARE',  x: 376, y: 46,  w: 136, h: 46  },
@@ -457,7 +457,7 @@ export const about = [
 /** Skills. Grouped the way an interviewer would ask about them. */
 export const parameters = [
   {
-    domain: 'RTL & signoff',
+    domain: 'Integration & implementation',
     tools: 'Lint (SpyGlass / Leda), CDC (Questa), compile-elaborate (VCS), synthesis (Design Compiler), PPA analysis',
     where: 'AMD — PCIe subsystem',
   },
