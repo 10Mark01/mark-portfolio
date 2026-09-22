@@ -12,7 +12,7 @@ export const profile = {
   name: 'Mark Samuel',
   eyebrow: ['Electrical & Computer Engineering', 'University of Toronto', 'Class of 2T8'],
   lede:
-    'Dean\'s List engineer at the University of Toronto, currently on AMD’s PCIe IPE team. Looking for hardware, ASIC and silicon roles for Winter and Summer 2027.',
+    'Dean\'s List engineer at the University of Toronto, currently on AMD’s PCIe IPE team. Looking for hardware engineering internships — digital, embedded, analog, PCB — for Winter and Summer 2027.',
   credentials: [
     'Minors in AI/ML and Robotics/Mechatronics',
     'Certificate in Religious Studies',
@@ -20,7 +20,7 @@ export const profile = {
   spec: [
     { label: 'Seeking', value: 'Winter & Summer 2027', highlight: true },
     { label: 'Now', value: 'AMD — PCIe IPE' },
-    { label: 'Focus', value: 'ASIC · RTL · Signoff' },
+    { label: 'Focus', value: 'Digital · Embedded · Analog' },
     { label: 'Based', value: 'Toronto, ON' },
     { label: 'Graduating', value: 'May 2028' },
   ],
@@ -432,8 +432,23 @@ export const projects = [
   },
 ];
 
+/**
+ * Two paragraphs: the facts first, then the range.
+ *
+ * Positioning is GENERAL HARDWARE — digital, embedded, analog, PCB. Do not
+ * narrow this to RTL/signoff just because the AMD role is signoff work; that
+ * is one entry on the page, not the target.
+ *
+ * Deliberately does NOT repeat the masthead or restate an experience bullet.
+ *
+ * TODO: work authorization. Recruiters screen on it and it isn't stated
+ * anywhere on the site. Add whichever is true to the end of paragraph one:
+ *   'Canadian citizen.'  |  'Permanent resident.'  |
+ *   'International student, eligible to work in Canada on a co-op work permit.'
+ */
 export const about = [
-  'Electrical & Computer Engineering at the University of Toronto, with minors in AI/ML and Robotics/Mechatronics, a certificate in religious studies, and a place on the Dean\'s List. Graduating May 2028. At AMD I work on the PCIe IPE team: lint, CDC, compile-elaborate, synthesis and memory compiler flows. Outside that, RTL on FPGAs, PCB design and embedded C. I’m looking for hardware, ASIC and silicon roles for Winter and Summer 2027.',
+  'Electrical & Computer Engineering at the University of Toronto, with minors in AI/ML and Robotics/Mechatronics, a certificate in religious studies, and a place on the Dean\'s List. Graduating May 2028. Based in Toronto. I’m looking for hardware engineering internships for Winter and Summer 2027.',
+  'Hardware across the stack: a RISC-V soft CPU running a physics simulator, Piano Tiles in Verilog on an FPGA, a gesture controller in embedded C, a Class D amplifier laid out and bench-validated, and lint, CDC and synthesis on production PCIe silicon at AMD. Digital, embedded or analog — I want to keep working across that range rather than narrow to one layer this early.',
 ];
 
 /** Skills. Grouped the way an interviewer would ask about them. */
@@ -512,6 +527,6 @@ export const offTheClock = {
 export const footer = {
   heading: 'Let’s talk.',
   body:
-    'I’m looking for a Winter or Summer 2027 internship in RTL design, verification or physical design. Happy to talk about anything on this page — or about what your team actually needs an intern to do.',
+    'I’m looking for a Winter or Summer 2027 hardware engineering internship — digital design, embedded, analog or PCB. Happy to talk about anything on this page — or about what your team actually needs an intern to do.',
   colophon: 'Mark Samuel — Toronto, ON — last updated September 2026',
 };
