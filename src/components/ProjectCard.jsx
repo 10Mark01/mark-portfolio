@@ -1,5 +1,6 @@
 import { Slideshow } from './Slideshow.jsx';
 import { PhysicsSim } from './PhysicsSim.jsx';
+import { VideoDemo } from './VideoDemo.jsx';
 
 /**
  * One project entry.
@@ -11,10 +12,11 @@ import { PhysicsSim } from './PhysicsSim.jsx';
  *
  * `slides` is optional too — give a project an array of `{ src, caption }`
  * and the card renders a deck viewer in place of the single image. `sim`
- * points at a runnable build and takes precedence over both.
+ * points at a runnable build and takes precedence over both. `video` is
+ * independent — a demo clip renders above any of them.
  */
 export function ProjectCard({ project }) {
-  const { tag, date, title, result, body, stack, href, image, slides, sim, todo } = project;
+  const { tag, date, title, result, body, stack, href, image, slides, sim, video, todo } = project;
 
   return (
     <article className={`proj${todo ? ' is-todo' : ''}`}>
@@ -38,6 +40,16 @@ export function ProjectCard({ project }) {
         </h3>
 
         <p className="result">{result}</p>
+
+        {video && (
+          <VideoDemo
+            src={video.src}
+            webm={video.webm}
+            poster={video.poster}
+            caption={video.caption}
+            label={title}
+          />
+        )}
 
         {sim ? (
           <PhysicsSim base={sim} />

@@ -126,6 +126,21 @@ export const experience = [
  */
 export const projects = [
   {
+    id: 'physics',
+    tag: 'RTL / FPGA',
+    date: 'Mar 2025',
+    domains: ['rtl'],
+    title: 'Physics Simulator on a Custom RISC-V Soft CPU',
+    result: 'Playable right here — the DE1-SoC C, compiled to WebAssembly',
+    body:
+      'A physics simulator running on a RISC-V soft core I built on a DE1-SoC, with VGA output. Getting it real-time meant optimizing floating-point operations, memory access patterns and control flow against the FPGA’s timing and resource limits. Correctness went through ModelSim first, then on-board debugging.',
+    stack: ['Verilog', 'C', 'RISC-V', 'DE1-SoC', 'ModelSim', 'VGA'],
+    image: null,
+    href: null,
+    // Compiled to WebAssembly and playable in the page. See public/physics/.
+    sim: '/physics',
+  },
+  {
     id: 'gesture',
     tag: 'Embedded',
     date: 'Mar 2026',
@@ -137,6 +152,12 @@ export const projects = [
     stack: ['STM32F446ZE', 'BNO055', 'ESP32', 'BLE HID', 'C', 'UART'],
     image: null,
     href: null,
+    video: {
+      src: '/projects/swishy/demo.mp4',
+      poster: '/projects/swishy/demo-poster.jpg',
+      caption:
+        'The controller driving the deck that documents it — tilt to move the cursor, swipe to change slides, over BLE HID with nothing installed on the laptop.',
+    },
     slides: [
       {
         src: '/projects/swishy/slide-01.webp',
@@ -156,17 +177,17 @@ export const projects = [
       {
         src: '/projects/swishy/slide-04.webp',
         caption:
-          'Battery-powered design. An untethered remote meant a power module for the ESP32 rails and an E5V reconfiguration on the STM32.',
+          'A remote cannot be tethered, so battery power was a requirement rather than a convenience. A 9 V cell feeds a breadboard module supplying the 5 V and 3.3 V rails — and because the Nucleo is wired to expect USB power, that meant soldering headers into its empty E5V and ground pads and moving the jumper to accept external 5 V.',
       },
       {
         src: '/projects/swishy/slide-05.webp',
         caption:
-          'Dropped the speaker driver — the current draw broke the 9 V power budget. A passive buzzer gave the same feedback for far less.',
+          'The 8 Ω 2 W speaker drew more current than anything else in the system, and a 9 V cell is poor at sustained high-current loads — a drain on runtime and a reliability risk. Useful feedback, wrong trade for a portable device, so it was cut in favour of battery life and stable operation.',
       },
       {
         src: '/projects/swishy/slide-06.webp',
         caption:
-          'Final split: STM32 owns sensing and processing, ESP32 owns BLE HID output, and the host-side Python script came out entirely.',
+          'The STM32 was a fixed requirement; the ESP32 was the engineering call. An HC-05 would only have carried bytes over UART, leaving a host-side script to translate them into input — the ESP32 instead presents as a real BLE HID mouse and keyboard, so the remote drives any laptop with nothing installed on it. It also split the bring-up cleanly: sensing on one board, HID on the other, joined over UART.',
       },
     ],
   },
@@ -208,21 +229,6 @@ export const projects = [
     stack: ['Python', 'PyTorch', 'NumPy', 'TinyML'],
     image: null,
     href: null,
-  },
-  {
-    id: 'physics',
-    tag: 'RTL / FPGA',
-    date: 'Mar 2025',
-    domains: ['rtl'],
-    title: 'Physics Simulator on a Custom RISC-V Soft CPU',
-    result: 'Real-time Coulomb forces and elastic collisions, rendered over VGA',
-    body:
-      'A physics simulator running on a RISC-V soft core I built on a DE1-SoC, with VGA output. Getting it real-time meant optimizing floating-point operations, memory access patterns and control flow against the FPGA’s timing and resource limits. Correctness went through ModelSim first, then on-board debugging.',
-    stack: ['Verilog', 'C', 'RISC-V', 'DE1-SoC', 'ModelSim', 'VGA'],
-    image: null,
-    href: null,
-    // Compiled to WebAssembly and playable in the page. See public/physics/.
-    sim: '/physics',
   },
   {
     id: 'responder',
