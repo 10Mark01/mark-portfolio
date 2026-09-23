@@ -233,7 +233,7 @@ export function GateGame() {
           </button>
         ))}
         <span className="bin-hint game-muted">
-          {held ? `${held} held — tap a slot` : 'drag a part, or tap it then tap a slot'}
+          {held ? `${held} held, tap a slot` : 'drag a part, or tap it then tap a slot'}
         </span>
       </div>
 
@@ -302,7 +302,7 @@ export function GateGame() {
 
       <p className="game-status" role="status">
         {matches ? (
-          <strong className="gate-win">Matched — next puzzle…</strong>
+          <strong className="gate-win">Matched. Next puzzle…</strong>
         ) : (
           <>
             <span className="game-muted">

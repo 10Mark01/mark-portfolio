@@ -12,14 +12,14 @@ export const profile = {
   name: 'Mark Samuel',
   eyebrow: ['Electrical & Computer Engineering', 'University of Toronto', 'Class of 2T8'],
   lede:
-    'Dean\'s List engineer at the University of Toronto, currently on AMD’s PCIe IPE team. Looking for hardware engineering internships — digital, embedded, analog, PCB — for Winter and Summer 2027.',
+    'Dean\'s List engineer at the University of Toronto, currently on AMD’s PCIe IPE team. Looking for hardware engineering internships in digital, embedded, analog or PCB for Winter and Summer 2027.',
   credentials: [
     'Minors in AI/ML and Robotics/Mechatronics',
     'Certificate in Religious Studies',
   ],
   spec: [
     { label: 'Seeking', value: 'Winter & Summer 2027', highlight: true },
-    { label: 'Now', value: 'AMD — PCIe IPE' },
+    { label: 'Now', value: 'AMD, PCIe IPE' },
     { label: 'Focus', value: 'Digital · Embedded · Analog' },
     { label: 'Based', value: 'Toronto, ON' },
     { label: 'Graduating', value: 'May 2028' },
@@ -80,12 +80,12 @@ export const experience = [
     team: 'PCIe Subsystem',
     org: 'AMD',
     location: 'Toronto, ON',
-    period: 'May 2026 — present',
+    period: 'May 2026 – present',
     domains: ['signoff', 'rtl', 'ml'],
     bullets: [
-      'Own the team’s Tcl async-FIFO extraction script, run under Synopsys Design Compiler. It reads RTL alongside build-time feature flags to classify edge cases correctly — continuous streaming phase-adjustment FIFOs among them — and produces per-tile reference lists, pinned to a changelist, that partner teams check for post-synthesis netlist equivalence and for pointer race conditions across gray-code crossings.',
+      'Own the team’s Tcl async-FIFO extraction script, run under Synopsys Design Compiler. It reads RTL alongside build-time feature flags to classify edge cases correctly, including continuous streaming phase-adjustment FIFOs, and produces per-tile reference lists, pinned to a changelist, that partner teams check for post-synthesis netlist equivalence and for pointer race conditions across gray-code crossings.',
       'Triage RTL lint, CDC and compile-elaborate violations at the core level across concurrent PCIe SoC programs, driving root cause with the designers and usually proposing the fix.',
-      'Drove the design waiver count toward zero — when one appeared, tracked down the owner and pushed for either a fix to the underlying violation or a documented sign-off taking responsibility that it was safe to keep. Third-party IP is the real exception: a rule written for our design style doesn’t always apply to someone else’s, so some of those waivers are the correct call.',
+      'Drove the design waiver count toward zero. When one appeared, tracked down the owner and pushed for either a fix to the underlying violation or a documented sign-off taking responsibility that it was safe to keep. Third-party IP is the exception. A rule written for our design style doesn’t always apply to someone else’s, so some of those waivers are correct.',
       'Replaced a manual connectivity-extract → Excel → hand-drawn diagram workflow with an automated Verilog parser → Postgres → FastAPI → React Flow pipeline, built end to end and verified against SQL at every hop.',
     ],
     stack: ['Tcl', 'Design Compiler', 'SpyGlass', 'Questa CDC', 'VCS', 'Perforce', 'React Flow'],
@@ -93,15 +93,15 @@ export const experience = [
   {
     id: 'robotics',
     logo: { src: '/logos/utra.webp', alt: 'University of Toronto Robotics Association' },
-    role: 'Team Leader — Battle Bots',
+    role: 'Team Leader, Battle Bots',
     org: 'UofT Robotics Association',
     location: 'Toronto, ON',
-    period: 'Sep 2024 — Mar 2025',
+    period: 'Sep 2024 – Mar 2025',
     domains: ['embedded'],
     bullets: [
       'Led six people to first place against 20+ teams. Designed the chassis in AutoCAD around IR and ultrasonic sensing for opponent tracking.',
       'Moved sensor handling onto hardware interrupts in Arduino C++ for deterministic response, which took detection error from 70% down to 10%.',
-      'Implemented PWM motor drivers and debugged high-speed spin stability — synchronizing actuator response with control logic across the hardware/software boundary under real-time constraints.',
+      'Implemented PWM motor drivers and debugged high-speed spin stability, syncing actuator response with control logic across the hardware/software boundary under real-time constraints.',
     ],
     stack: ['Arduino C++', 'Interrupts', 'PWM', 'AutoCAD'],
   },
@@ -111,7 +111,7 @@ export const experience = [
     role: 'Operations Intern',
     org: 'Enwave Energy Corporation',
     location: 'Toronto, ON',
-    period: 'May 2024 — Aug 2024',
+    period: 'May 2024 – Aug 2024',
     domains: ['embedded'],
     bullets: [
       'Monitored industrial chiller performance through temperature sensors and magnetic flow meters, validating system flow rates and efficiency.',
@@ -136,7 +136,7 @@ export const projects = [
     date: 'Mar 2025',
     domains: ['rtl'],
     title: 'Physics Simulator on a Custom RISC-V Soft CPU',
-    result: 'Playable right here — the DE1-SoC C, compiled to WebAssembly',
+    result: 'Playable right here: the DE1-SoC C, compiled to WebAssembly',
     body:
       'A physics simulator running on a RISC-V soft core I built on a DE1-SoC, with VGA output. Getting it real-time meant optimizing floating-point operations, memory access patterns and control flow against the FPGA’s timing and resource limits. Correctness went through ModelSim first, then on-board debugging.',
     stack: ['Verilog', 'C', 'RISC-V', 'DE1-SoC', 'ModelSim', 'VGA'],
@@ -161,13 +161,13 @@ export const projects = [
       src: '/projects/swishy/demo.mp4',
       poster: '/projects/swishy/demo-poster.jpg',
       caption:
-        'The controller driving the deck that documents it — tilt to move the cursor, swipe to change slides, over BLE HID with nothing installed on the laptop.',
+        'The controller driving the deck that documents it. Tilt to move the cursor, swipe to change slides, over BLE HID with nothing installed on the laptop.',
     },
     slides: [
       {
         src: '/projects/swishy/slide-01.webp',
         caption:
-          'System block diagram — IMU over I2C into the STM32, STM32 to ESP32 over UART, ESP32 to the laptop over BLE.',
+          'System block diagram. IMU over I2C into the STM32, STM32 to ESP32 over UART, ESP32 to the laptop over BLE.',
       },
       {
         src: '/projects/swishy/slide-02.webp',
@@ -177,22 +177,22 @@ export const projects = [
       {
         src: '/projects/swishy/slide-03.webp',
         caption:
-          'ESP32 dispatch: a UART packet is parsed as either a gesture — left/right arrow key — or a relative mouse move, then sent as BLE HID.',
+          'ESP32 dispatch: a UART packet is parsed as either a gesture (left/right arrow key) or a relative mouse move, then sent as BLE HID.',
       },
       {
         src: '/projects/swishy/slide-04.webp',
         caption:
-          'A remote cannot be tethered, so battery power was a requirement rather than a convenience. A 9 V cell feeds a breadboard module supplying the 5 V and 3.3 V rails — and because the Nucleo is wired to expect USB power, that meant soldering headers into its empty E5V and ground pads and moving the jumper to accept external 5 V.',
+          'A remote cannot be tethered, so it had to run on a battery. A 9 V cell feeds a breadboard module supplying the 5 V and 3.3 V rails. Because the Nucleo is wired to expect USB power, that meant soldering headers into its empty E5V and ground pads and moving the jumper to accept external 5 V.',
       },
       {
         src: '/projects/swishy/slide-05.webp',
         caption:
-          'The 8 Ω 2 W speaker drew more current than anything else in the system, and a 9 V cell is poor at sustained high-current loads — a drain on runtime and a reliability risk. Useful feedback, wrong trade for a portable device, so it was cut in favour of battery life and stable operation.',
+          'The 8 Ω 2 W speaker drew more current than anything else in the system, and a 9 V cell is poor at sustained high-current loads, which cost runtime and reliability. Good feedback, wrong trade for a portable device, so it was cut.',
       },
       {
         src: '/projects/swishy/slide-06.webp',
         caption:
-          'The STM32 was a fixed requirement; the ESP32 was the engineering call. An HC-05 would only have carried bytes over UART, leaving a host-side script to translate them into input — the ESP32 instead presents as a real BLE HID mouse and keyboard, so the remote drives any laptop with nothing installed on it. It also split the bring-up cleanly: sensing on one board, HID on the other, joined over UART.',
+          'The STM32 was a fixed requirement; the ESP32 was the engineering call. An HC-05 would only have carried bytes over UART, leaving a host-side script to translate them into input. The ESP32 instead presents as a real BLE HID mouse and keyboard, so the remote drives any laptop with nothing installed on it. It also split the bring-up cleanly: sensing on one board, HID on the other, joined over UART.',
       },
     ],
   },
@@ -204,7 +204,7 @@ export const projects = [
     title: 'Crop Disease Classification',
     result: '96.44% on a corn dataset the model had never seen',
     body:
-      'LargeNet — an AlexNet-derived CNN with batch normalization, dropout and adaptive pooling — pretrained on PlantDoc and PlantVillage with **every corn image held out**, then fine-tuned on the CD&S field dataset. Holding corn out of pretraining is the point: it makes the score on unseen corn a measure of transfer rather than memorization. Test accuracy landed at 94.10% against a baseline CNN’s 86.81%, and on a wholly unseen dataset the model scored higher than its own validation accuracy.',
+      'LargeNet, an AlexNet-derived CNN with batch normalization, dropout and adaptive pooling, pretrained on PlantDoc and PlantVillage with **every corn image held out**, then fine-tuned on the CD&S field dataset. Corn is held out of pretraining on purpose, so the score on unseen corn measures transfer instead of memorization. Test accuracy landed at 94.10% against a baseline CNN’s 86.81%, and on a wholly unseen dataset the model scored higher than its own validation accuracy.',
     stack: ['Python', 'PyTorch', 'CNN', 'Transfer learning'],
     image: null,
     href: null,
@@ -235,9 +235,9 @@ export const projects = [
     date: 'Jan 2025',
     domains: ['pcb'],
     title: 'Class D Power Amplifier & Low-Pass Filter',
-    result: 'Two of three requirements met — and a root cause for the third',
+    result: 'Two of three requirements met, and a root cause for the third',
     body:
-      'A Class D amplifier for an RF transmit chain. I explored BJT, comparator and MOSFET topologies in LTSpice and went with parallel MOSFETs to carry the current at frequency, fabricated and hand-assembled a 2-layer board with ground planes and decoupling, and wrote Python to automate the bandwidth, cutoff and waveform measurements off the bench instruments. Amplification across 8–16 MHz passed, and harmonic distortion came in at **0.58% against a 10% limit**. Output power did not clear its 1 W floor — and the more useful half of the work was finding out exactly why: a gate driver whose 45 ns propagation delay consumed 63% of the switching cycle, and an OUT_SNK pin never wired to the MOSFET gates, so they could be driven high but never pulled low. Both are specified fixes now. The deck walks the diagnosis.',
+      'A Class D amplifier for an RF transmit chain. I explored BJT, comparator and MOSFET topologies in LTSpice and went with parallel MOSFETs to carry the current at frequency, fabricated and hand-assembled a 2-layer board with ground planes and decoupling, and wrote Python to automate the bandwidth, cutoff and waveform measurements off the bench instruments. Amplification across 8–16 MHz passed, and harmonic distortion came in at **0.58% against a 10% limit**. Output power did not clear its 1 W floor. The more useful half of the work was finding out exactly why: a gate driver whose 45 ns propagation delay consumed 63% of the switching cycle, and an OUT_SNK pin never wired to the MOSFET gates, so they could be driven high but never pulled low. Both are specified fixes now. The deck walks the diagnosis.',
     stack: ['LTSpice', 'Altium', 'MOSFET', '2-layer PCB', 'Python'],
     image: null,
     href: null,
@@ -245,7 +245,7 @@ export const projects = [
       {
         src: '/projects/amplifier/slide-01.webp',
         caption:
-          'The routed two-layer board beside the assembled article — hand-soldered, jumper wires and all.',
+          'The routed two-layer board beside the assembled article. Hand-soldered, jumper wires and all.',
       },
       {
         src: '/projects/amplifier/slide-02.webp',
@@ -255,7 +255,7 @@ export const projects = [
       {
         src: '/projects/amplifier/slide-03.webp',
         caption:
-          'What comes in is a modulated, low-power RF signal. The design philosophy throughout was efficiency — cut power loss, keep switching fast — because range and clarity both follow from it.',
+          'What comes in is a modulated, low-power RF signal. The design philosophy throughout was efficiency: cut power loss, keep switching fast, because range and clarity both follow from it.',
       },
       {
         src: '/projects/amplifier/slide-04.webp',
@@ -275,7 +275,7 @@ export const projects = [
       {
         src: '/projects/amplifier/slide-07.webp',
         caption:
-          'Stage II, the gate driver — it strengthens the comparator output so the transistors switch fully on and off instead of lingering between. Note the two output pins, OUT_SRC and OUT_SNK. That detail comes back.',
+          'Stage II, the gate driver. It strengthens the comparator output so the transistors switch fully on and off instead of lingering between. Note the two output pins, OUT_SRC and OUT_SNK. That detail comes back.',
       },
       {
         src: '/projects/amplifier/slide-08.webp',
@@ -285,7 +285,7 @@ export const projects = [
       {
         src: '/projects/amplifier/slide-09.webp',
         caption:
-          'A Butterworth output filter, picked to avoid passband ripple and favour amplitude accuracy over phase linearity — linear phase meaning every frequency is delayed by exactly the same amount.',
+          'A Butterworth output filter, picked to avoid passband ripple and favour amplitude accuracy over phase linearity. Linear phase means every frequency is delayed by exactly the same amount.',
       },
       {
         src: '/projects/amplifier/slide-10.webp',
@@ -300,7 +300,7 @@ export const projects = [
       {
         src: '/projects/amplifier/slide-12.webp',
         caption:
-          'Requirement 1 — amplification across 8–16 MHz, targeting 14 MHz.',
+          'Requirement 1: amplification across 8–16 MHz, targeting 14 MHz.',
       },
       {
         src: '/projects/amplifier/slide-13.webp',
@@ -315,7 +315,7 @@ export const projects = [
       {
         src: '/projects/amplifier/slide-15.webp',
         caption:
-          'The band matters because Subsystem A, the receiver, only detects between 8 and 16 MHz — anything outside would be filtered out at the far end. It is also the amateur allocation, so transmitting outside it would interfere with other services.',
+          'The band matters because Subsystem A, the receiver, only detects between 8 and 16 MHz, so anything outside would be filtered out at the far end. It is also the amateur allocation, so transmitting outside it would interfere with other services.',
       },
       {
         src: '/projects/amplifier/slide-16.webp',
@@ -325,7 +325,7 @@ export const projects = [
       {
         src: '/projects/amplifier/slide-17.webp',
         caption:
-          'Requirement 2 — total harmonic distortion below 10% with a 14 MHz input.',
+          'Requirement 2: total harmonic distortion below 10% with a 14 MHz input.',
       },
       {
         src: '/projects/amplifier/slide-18.webp',
@@ -340,7 +340,7 @@ export const projects = [
       {
         src: '/projects/amplifier/slide-20.webp',
         caption:
-          'Measured two ways. An LTSpice FFT with an ideal 1 Vpp, 14 MHz input gave 2.4% THD — the fundamental passing at magnitude 1, the second and third attenuated. The assembled PCB, measured with a Python script, came in at 0.58%.',
+          'Measured two ways. An LTSpice FFT with an ideal 1 Vpp, 14 MHz input gave 2.4% THD, with the fundamental passing at magnitude 1 and the second and third attenuated. The assembled PCB, measured with a Python script, came in at 0.58%.',
       },
       {
         src: '/projects/amplifier/slide-21.webp',
@@ -355,12 +355,12 @@ export const projects = [
       {
         src: '/projects/amplifier/slide-23.webp',
         caption:
-          'Requirement 3 — 1–10 W of continuous output into a 50 Ω load. At least 1 W so the transmission carries reliably; under 10 W to keep the output in a safe range for the equipment.',
+          'Requirement 3: 1–10 W of continuous output into a 50 Ω load. At least 1 W so the transmission carries reliably; under 10 W to keep the output in a safe range for the equipment.',
       },
       {
         src: '/projects/amplifier/slide-24.webp',
         caption:
-          'Closing the switch pushes current through the inductor, storing magnetic energy; opening it releases that energy through the filter into the load, acting as a second source alongside the 12 V supply. Simulation gave 20 V peaks — about 4 W into 50 Ω.',
+          'Closing the switch pushes current through the inductor, storing magnetic energy; opening it releases that energy through the filter into the load, acting as a second source alongside the 12 V supply. Simulation gave 20 V peaks, about 4 W into 50 Ω.',
       },
       {
         src: '/projects/amplifier/slide-25.webp',
@@ -370,12 +370,12 @@ export const projects = [
       {
         src: '/projects/amplifier/slide-26.webp',
         caption:
-          'Root cause. Rise and fall times of 6.5 ns and 4.5 ns were fine for 14 MHz — the oversight was the gate driver’s 45 ns internal propagation delay, nearly 63% of the switching cycle. The MOSFETs switched late and sat between ON and OFF, collapsing the output swing and drawing so much current the supply never held 12 V; it averaged 3.9 V.',
+          'Root cause. Rise and fall times of 6.5 ns and 4.5 ns were fine for 14 MHz. The oversight was the gate driver’s 45 ns internal propagation delay, nearly 63% of the switching cycle. The MOSFETs switched late and sat between ON and OFF, collapsing the output swing and drawing so much current the supply never held 12 V; it averaged 3.9 V.',
       },
       {
         src: '/projects/amplifier/slide-27.webp',
         caption:
-          'And the wiring. A generic gate driver has one output pin that pulls the gate both high and low; ours splits it into OUT_SRC and OUT_SNK. Only OUT_SRC was connected — the pin that closes the switch — so nothing could open it again.',
+          'And the wiring. A generic gate driver has one output pin that pulls the gate both high and low; ours splits it into OUT_SRC and OUT_SNK. Only OUT_SRC was connected, the pin that closes the switch, so nothing could open it again.',
       },
       {
         src: '/projects/amplifier/slide-28.webp',
@@ -385,7 +385,7 @@ export const projects = [
       {
         src: '/projects/amplifier/slide-29.webp',
         caption:
-          'Requirement 3: not met on this iteration of the PCB — with the cause identified rather than left open.',
+          'Requirement 3: not met on this iteration of the PCB, with the cause identified.',
       },
       {
         src: '/projects/amplifier/slide-30.webp',
@@ -395,7 +395,7 @@ export const projects = [
       {
         src: '/projects/amplifier/slide-31.webp',
         caption:
-          'Full radio integration was not attempted, since the power requirement was unmet. Instead the filter was tested on its own — a distorted signal in, a clean sine out — which confirmed it worked and pointed the fault at the amplifier stage.',
+          'Full radio integration was not attempted, since the power requirement was unmet. Instead the filter was tested on its own, a distorted signal in and a clean sine out, which confirmed it worked and pointed the fault at the amplifier stage.',
       },
       {
         src: '/projects/amplifier/slide-32.webp',
@@ -425,7 +425,7 @@ export const projects = [
     date: 'Dec 2024',
     domains: ['rtl'],
     title: 'Piano Tiles in Verilog',
-    result: 'Playable on hardware — keyboard in, VGA and audio out',
+    result: 'Playable on hardware: keyboard in, VGA and audio out',
     body:
       'Piano Tiles implemented in Verilog with keyboard input, speaker output and VGA rendering, using ROM for the tile graphics and memory-mapped I/O for the peripherals. Game progression runs on an FSM. Validated in ModelSim for correctness and timing, then deployed to the FPGA.',
     stack: ['Verilog', 'Quartus Prime', 'ModelSim', 'FSM', 'VGA'],
@@ -450,7 +450,7 @@ export const projects = [
  */
 export const about = [
   'Electrical & Computer Engineering at the University of Toronto, with minors in AI/ML and Robotics/Mechatronics, a certificate in religious studies, and a place on the Dean\'s List. Graduating May 2028. Based in Toronto. I’m looking for hardware engineering internships for Winter and Summer 2027.',
-  'Hardware across the stack: a RISC-V soft CPU running a physics simulator, Piano Tiles in Verilog on an FPGA, a gesture controller in embedded C, a Class D amplifier laid out and bench-validated, and lint, CDC and synthesis on production PCIe silicon at AMD. Digital, embedded or analog — I want to keep working across that range rather than narrow to one layer this early.',
+  'Hardware across the stack: a RISC-V soft CPU running a physics simulator, Piano Tiles in Verilog on an FPGA, a gesture controller in embedded C, a Class D amplifier laid out and bench-validated, and lint, CDC and synthesis on production PCIe silicon at AMD. I’d rather keep working across digital, embedded and analog than pick one layer this early.',
 ];
 
 /** Skills. Grouped the way an interviewer would ask about them. */
@@ -458,7 +458,7 @@ export const parameters = [
   {
     domain: 'Integration & implementation',
     tools: 'Lint (SpyGlass / Leda), CDC (Questa), compile-elaborate (VCS), synthesis (Design Compiler), PPA analysis',
-    where: 'AMD — PCIe subsystem',
+    where: 'AMD, PCIe subsystem',
   },
   {
     domain: 'Digital design',
@@ -473,7 +473,7 @@ export const parameters = [
   {
     domain: 'Memory & IP',
     tools: 'SRAM / memory-compiler flows, ECC wrappers, genIP diffing, distributed builds (LSF)',
-    where: 'AMD — PCIe subsystem',
+    where: 'AMD, PCIe subsystem',
   },
   {
     domain: 'Embedded',
@@ -534,7 +534,7 @@ export const games = [
     id: 'gates',
     name: 'Gate puzzle',
     blurb:
-      'Drag AND, OR, XOR and NOT onto the board until your output column matches the target. Puzzles are generated, so they never run out \u2014 two inputs and one gate to start, three inputs and two gates once you get going.',
+      'Drag AND, OR, XOR and NOT onto the board until your output column matches the target. Puzzles are generated, so they never run out. Two inputs and one gate to start, three inputs and two gates once you get going.',
   },
   {
     id: 'bits',
@@ -545,13 +545,13 @@ export const games = [
     id: 'snake',
     name: 'Snake',
     blurb:
-      'Snake on a 320 \u00d7 240 framebuffer scaled 2\u00d7 with nearest-neighbour — the same geometry as the DE1-SoC simulator above.',
+      'Snake on a 320 \u00d7 240 framebuffer scaled 2\u00d7 with nearest-neighbour, the same geometry as the DE1-SoC simulator above.',
   },
 ];
 
 export const footer = {
   heading: 'Let’s talk.',
   body:
-    'I’m looking for a Winter or Summer 2027 hardware engineering internship — digital design, embedded, analog or PCB. Happy to talk about anything on this page — or about what your team actually needs an intern to do.',
-  colophon: 'Mark Samuel — Toronto, ON — last updated September 2026',
+    'I’m looking for a Winter or Summer 2027 hardware engineering internship in digital design, embedded, analog or PCB. Happy to talk about anything on this page, or about what your team actually needs an intern to do.',
+  colophon: 'Mark Samuel · Toronto, ON · last updated September 2026',
 };

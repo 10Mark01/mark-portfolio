@@ -22,7 +22,7 @@ export function ExperienceCard({ item }) {
             </h3>
             <p className="exp-org">
               <strong>{org}</strong>
-              <span className="exp-loc"> — {location}</span>
+              <span className="exp-loc"> · {location}</span>
             </p>
           </div>
         </div>

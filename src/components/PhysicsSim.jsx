@@ -149,7 +149,7 @@ export function PhysicsSim({ base = '/physics', poster = '/physics/assets/menu.p
           </>
         ) : (
           <span className="sim-note">
-            DE1-SoC project compiled to WebAssembly — originally 320×240 VGA. Keyboard or buttons.
+            DE1-SoC project compiled to WebAssembly, originally 320×240 VGA. Keyboard or buttons.
           </span>
         )}
       </figcaption>

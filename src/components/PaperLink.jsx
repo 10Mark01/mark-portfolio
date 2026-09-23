@@ -11,7 +11,7 @@ export function PaperLink({ href, label, meta, thumb, title }) {
       href={href}
       target="_blank"
       rel="noreferrer noopener"
-      aria-label={`${label} — opens a PDF in a new tab`}
+      aria-label={`${label}, opens a PDF in a new tab`}
     >
       {thumb && <img className="paper-thumb" src={thumb} alt="" aria-hidden="true" loading="lazy" />}
 

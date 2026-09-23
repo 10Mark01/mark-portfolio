@@ -123,12 +123,12 @@ function FloorplanBase({ activeId, onSelect }) {
         })}
 
         <text className="die-mark" x="32" y="180">
-          M. SAMUEL — UofT ECE 2T8 — TORONTO, ON
+          M. SAMUEL · UofT ECE 2T8 · TORONTO, ON
         </text>
       </svg>
 
       <figcaption>
-        Blocks are areas I&rsquo;ve actually worked in, not a wish list.{' '}
+        Every block is somewhere I&rsquo;ve actually worked.{' '}
         <span className="hint">Pick one to filter the page.</span>
       </figcaption>
     </figure>

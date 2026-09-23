@@ -78,7 +78,7 @@ export default function App() {
       {domain && (
         <div className="filterbar" role="status">
           <span>
-            Showing <strong>{domainLabel}</strong> — {matchCount}{' '}
+            Showing <strong>{domainLabel}</strong>: {matchCount}{' '}
             {matchCount === 1 ? 'entry' : 'entries'}
           </span>
           <button type="button" onClick={() => setDomain(null)}>

@@ -65,7 +65,7 @@ export function ProjectCard({ project }) {
             <img
               className="proj-image"
               src={image}
-              alt={`${title} — project photo`}
+              alt={`${title}, project photo`}
               loading="lazy"
               decoding="async"
             />

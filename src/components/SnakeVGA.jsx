@@ -193,7 +193,7 @@ export function SnakeVGA() {
         <canvas ref={canvasRef} width={W} height={H} aria-label="Snake game board" />
         {!running && (
           <div className="vga-overlay">
-            {dead && <p className="vga-dead">Crashed — {score}</p>}
+            {dead && <p className="vga-dead">Crashed at {score}</p>}
             <button type="button" className="game-btn" onClick={reset}>
               {dead ? 'Run again' : 'Run it'}
             </button>

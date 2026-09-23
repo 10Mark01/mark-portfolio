@@ -15,7 +15,7 @@ export function VideoDemo({ src, webm, poster, caption, label }) {
         preload="none"
         playsInline
         poster={poster}
-        aria-label={label ? `${label} — demo recording` : 'Demo recording'}
+        aria-label={label ? `${label}, demo recording` : 'Demo recording'}
       >
         {webm && <source src={webm} type="video/webm" />}
         <source src={src} type="video/mp4" />
