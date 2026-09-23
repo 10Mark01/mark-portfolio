@@ -482,7 +482,7 @@ export const parameters = [
   },
   {
     domain: 'Analog & PCB',
-    tools: 'LTSpice, Altium Designer, 2-layer layout, assembly and soldering, bench validation',
+    tools: 'LTSpice, Altium Designer, 2-layer layout, assembly and soldering, oscilloscope, multimeter, function generator',
     where: 'Class D amplifier & LPF',
   },
   {
