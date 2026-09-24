@@ -79,7 +79,7 @@ export const experience = [
     role: 'Silicon Implementation & Integration Intern',
     team: 'PCIe Subsystem',
     org: 'AMD',
-    location: 'Toronto, ON',
+    location: 'Markham, ON',
     period: 'May 2026 – present',
     domains: ['signoff', 'rtl', 'ml'],
     bullets: [
