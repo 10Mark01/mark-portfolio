@@ -85,10 +85,12 @@ export const experience = [
     bullets: [
       'Own the team’s Tcl async-FIFO extraction script, run under Synopsys Design Compiler. It reads RTL alongside build-time feature flags to classify edge cases correctly, including continuous streaming phase-adjustment FIFOs, and produces per-tile reference lists, pinned to a changelist, that partner teams check for post-synthesis netlist equivalence and for pointer race conditions across gray-code crossings.',
       'Triage RTL lint, CDC and compile-elaborate violations at the core level across concurrent PCIe SoC programs, driving root cause with the designers and usually proposing the fix.',
+      'Analyze synthesis QoR for the PCIe subsystem: cell count, standard-cell, hard-macro and RAM area, ULVT VT mix, and levels of logic including max flop-to-flop depth, flagging PPA regressions to the designers.',
+      'Co-developed an LLM-based agent skill that automates RTL-to-netlist logic equivalence checking in Cadence Conformal.',
       'Drove the design waiver count toward zero. When one appeared, tracked down the owner and pushed for either a fix to the underlying violation or a documented sign-off taking responsibility that it was safe to keep. Third-party IP is the exception. A rule written for our design style doesn’t always apply to someone else’s, so some of those waivers are correct.',
       'Replaced a manual connectivity-extract → Excel → hand-drawn diagram workflow with an automated Verilog parser → Postgres → FastAPI → React Flow pipeline, built end to end and verified against SQL at every hop.',
     ],
-    stack: ['Tcl', 'Design Compiler', 'SpyGlass', 'Questa CDC', 'VCS', 'Perforce', 'React Flow'],
+    stack: ['Tcl', 'Design Compiler', 'Conformal', 'SpyGlass', 'Questa CDC', 'VCS', 'Perforce', 'React Flow'],
   },
   {
     id: 'robotics',
@@ -457,7 +459,7 @@ export const about = [
 export const parameters = [
   {
     domain: 'Integration & implementation',
-    tools: 'Lint (SpyGlass / Leda), CDC (Questa), compile-elaborate (VCS), synthesis (Design Compiler), PPA analysis',
+    tools: 'Lint (SpyGlass / Leda), CDC (Questa), compile-elaborate (VCS), synthesis (Design Compiler), synthesis QoR / PPA analysis, LEC (Conformal)',
     where: 'AMD, PCIe subsystem',
   },
   {
