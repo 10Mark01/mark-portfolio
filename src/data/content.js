@@ -88,7 +88,7 @@ export const experience = [
       'Analyze synthesis QoR for the PCIe subsystem: cell count, standard-cell, hard-macro and RAM area, ULVT VT mix, and levels of logic including max flop-to-flop depth, flagging PPA regressions to the designers.',
       'Co-developed an LLM-based agent skill that automates RTL-to-netlist logic equivalence checking in Cadence Conformal.',
       'Drove the design waiver count toward zero. When one appeared, tracked down the owner and pushed for either a fix to the underlying violation or a documented sign-off taking responsibility that it was safe to keep. Third-party IP is the exception. A rule written for our design style doesn’t always apply to someone else’s, so some of those waivers are correct.',
-      'Replaced a manual connectivity-extract → Excel → hand-drawn diagram workflow with an automated Verilog parser → Postgres → FastAPI → React Flow pipeline, built end to end and verified against SQL at every hop.',
+      'Built an automated PCIe connectivity visualizer that traces each signal from the top-level Verilog through every module instantiation and diagrams the connections between 12+ tiles, with bundle widths color-coded by repeater constraint (EQ0, LE1). Used across 8+ projects; a diagram that took about 3 hours by hand in Excel and Visio now takes 5 minutes. Built on Postgres, FastAPI and React Flow.',
     ],
     stack: ['Tcl', 'Design Compiler', 'Conformal', 'SpyGlass', 'Questa CDC', 'VCS', 'Perforce', 'React Flow'],
   },
