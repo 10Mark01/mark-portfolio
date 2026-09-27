@@ -1718,3 +1718,83 @@ footer h2 {
 .game-controls {
   font-family: var(--mono);
 }
+
+/* ---- game additions ---- */
+
+.game-btn-quiet {
+  color: var(--faint);
+  border-color: var(--line-strong);
+}
+
+.game-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.game-status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.gate-notice {
+  color: var(--via);
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.drill-sets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.drill-set {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 4px 10px;
+  cursor: pointer;
+}
+
+.drill-set:hover:not(:disabled) {
+  border-color: var(--line-strong);
+  color: var(--ink);
+}
+
+.drill-set.is-current {
+  color: var(--copper);
+  border-color: var(--copper);
+}
+
+.drill-set:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.drill.is-skip {
+  border-color: var(--via);
+}
+
+.drill-reveal {
+  font-family: var(--mono);
+  min-height: 1.4em;
+  margin-top: -6px;
+}
+
+.drill-reveal strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.drill-clock.is-low {
+  color: var(--via);
+}
+
+.vga:focus {
+  outline: none;
+}

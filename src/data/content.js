@@ -541,7 +541,7 @@ export const games = [
   {
     id: 'bits',
     name: 'Bit drill',
-    blurb: 'Binary and hex conversion against a 60-second clock. Best score is kept in your browser.',
+    blurb: 'Binary and hex conversion against a 60-second clock, in four question sets. Best score per set is kept in your browser.',
   },
   {
     id: 'snake',

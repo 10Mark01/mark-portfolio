@@ -68,21 +68,61 @@ function generate(shape, avoidKey) {
 
     const key = table.join('');
     if (key === avoidKey) continue;
-    return { table, key };
+    return { table, key, solution: { gates: padGates(gates), invs: padInvs(invs) } };
   }
   const gates = Array.from({ length: shape.gates }, () => 'XOR');
-  const table = tableOf(shape, gates, Array(legCount(shape)).fill(0));
-  return { table, key: table.join('') };
+  const invs = Array(legCount(shape)).fill(0);
+  const table = tableOf(shape, gates, invs);
+  return { table, key: table.join(''), solution: { gates: padGates(gates), invs: padInvs(invs) } };
 }
+
+/* Board state is always two gate slots and four inverter slots. */
+const padGates = (g) => [g[0] ?? null, g[1] ?? null];
+const padInvs = (v) => [0, 1, 2, 3].map((i) => v[i] ?? 0);
+
+/* Progress survives switching tabs and reloading. */
+const SAVE_KEY = 'mark-portfolio:gates-progress';
+const readSaved = () => {
+  try {
+    const saved = JSON.parse(window.localStorage.getItem(SAVE_KEY) || '{}');
+    return {
+      level: Math.max(0, Math.floor(Number(saved.level)) || 0),
+      solved: Math.max(0, Math.floor(Number(saved.solved)) || 0),
+    };
+  } catch {
+    return { level: 0, solved: 0 };
+  }
+};
+const writeSaved = (level, solved) => {
+  try {
+    window.localStorage.setItem(SAVE_KEY, JSON.stringify({ level, solved }));
+  } catch {
+    /* ignore */
+  }
+};
 
 const LETTERS = ['A', 'B', 'C'];
 
 export function GateGame() {
-  const [level, setLevel] = useState(0);
-  const [solved, setSolved] = useState(0);
+  const [saved] = useState(readSaved);
+  const [level, setLevel] = useState(saved.level);
+  const [solved, setSolved] = useState(saved.solved);
   const shape = useMemo(() => shapeFor(level), [level]);
 
-  const [puzzle, setPuzzle] = useState(() => generate(shapeFor(0), null));
+  const [puzzle, setPuzzle] = useState(() => generate(shapeFor(saved.level), null));
+  // Set when the player asked for the answer: the board still advances, but
+  // it does not count as solved and the level does not go up.
+  const [revealed, setRevealed] = useState(false);
+  // One-line feedback for a part dropped in a slot that cannot take it.
+  const [notice, setNotice] = useState(null);
+
+  useEffect(() => writeSaved(level, solved), [level, solved]);
+
+  useEffect(() => {
+    if (!notice) return undefined;
+    const id = window.setTimeout(() => setNotice(null), 2200);
+    return () => window.clearTimeout(id);
+  }, [notice]);
   const [gates, setGates] = useState([null, null]);
   const [invs, setInvs] = useState([0, 0, 0, 0]);
 
@@ -99,26 +139,49 @@ export function GateGame() {
     setGates([null, null]);
     setInvs([0, 0, 0, 0]);
     setHeld(null);
+    setNotice(null);
   }, []);
 
   const nextPuzzle = useCallback(
     (nextLevel) => {
       setLevel(nextLevel);
       setPuzzle(generate(shapeFor(nextLevel), puzzle.key));
+      setRevealed(false);
       clearBoard();
     },
     [clearBoard, puzzle.key]
   );
 
   // Advance a beat after the board goes green, so the solve is visible.
+  // A revealed answer gets longer on screen, since it is there to be read.
   useEffect(() => {
     if (!matches) return undefined;
-    const id = window.setTimeout(() => {
-      setSolved((s) => s + 1);
-      nextPuzzle(level + 1);
-    }, 700);
+    const id = window.setTimeout(
+      () => {
+        if (revealed) {
+          nextPuzzle(level);
+        } else {
+          setSolved((s) => s + 1);
+          nextPuzzle(level + 1);
+        }
+      },
+      revealed ? 2600 : 700
+    );
     return () => window.clearTimeout(id);
-  }, [matches, level, nextPuzzle]);
+  }, [matches, revealed, level, nextPuzzle]);
+
+  const showSolution = () => {
+    setGates(puzzle.solution.gates);
+    setInvs(puzzle.solution.invs);
+    setHeld(null);
+    setNotice(null);
+    setRevealed(true);
+  };
+
+  const resetProgress = () => {
+    setSolved(0);
+    nextPuzzle(0);
+  };
 
   const place = useCallback((kind, slotType, index) => {
     if (slotType === 'gate' && kind !== 'NOT') {
@@ -133,10 +196,15 @@ export function GateGame() {
         next[index] = 1;
         return next;
       });
+    } else if (kind === 'NOT') {
+      setNotice('NOT goes in a ○ slot on a wire, not in a gate box');
+    } else {
+      setNotice(`${kind} goes in a gate box, only NOT fits on a wire`);
     }
   }, []);
 
   const onPointerDown = (kind) => (event) => {
+    if (matches) return;
     origin.current = { x: event.clientX, y: event.clientY, kind, moved: false };
     event.currentTarget.setPointerCapture?.(event.pointerId);
   };
@@ -172,6 +240,8 @@ export function GateGame() {
   };
 
   const onSlotClick = (slotType, index) => () => {
+    // The board is locked for the beat between a match and the next puzzle.
+    if (matches) return;
     if (held) {
       place(held, slotType, index);
       setHeld(null);
@@ -249,6 +319,7 @@ export function GateGame() {
                       type="button"
                       data-slot="inv"
                       data-index={legItem.slot}
+                      aria-label={`Inverter on ${legItem.label}: ${invs[legItem.slot] ? 'NOT' : 'empty'}`}
                       className={invs[legItem.slot] ? 'drop drop-inv is-set' : 'drop drop-inv'}
                       onClick={onSlotClick('inv', legItem.slot)}
                     >
@@ -263,6 +334,7 @@ export function GateGame() {
               type="button"
               data-slot="gate"
               data-index={stage}
+              aria-label={`Gate ${stage + 1}: ${gates[stage] ?? 'empty'}`}
               className={gates[stage] ? 'drop drop-gate is-set' : 'drop drop-gate'}
               onClick={onSlotClick('gate', stage)}
             >
@@ -302,20 +374,39 @@ export function GateGame() {
 
       <p className="game-status" role="status">
         {matches ? (
-          <strong className="gate-win">Matched. Next puzzle…</strong>
+          revealed ? (
+            <strong className="gate-win">One solution. Next puzzle…</strong>
+          ) : (
+            <strong className="gate-win">Matched. Next puzzle…</strong>
+          )
         ) : (
           <>
-            <span className="game-muted">
-              {complete
-                ? `${mine.filter((v, i) => v === puzzle.table[i]).length} of ${rows} rows matching`
-                : 'fill every gate slot'}
-            </span>{' '}
+            {notice ? (
+              <strong className="gate-notice">{notice}</strong>
+            ) : (
+              <span className="game-muted">
+                {complete
+                  ? `${mine.filter((v, i) => v === puzzle.table[i]).length} of ${rows} rows matching`
+                  : 'fill every gate slot'}
+              </span>
+            )}{' '}
             <button type="button" className="game-btn" onClick={clearBoard}>
               Clear
             </button>{' '}
             <button type="button" className="game-btn" onClick={() => nextPuzzle(level)}>
               New puzzle
+            </button>{' '}
+            <button type="button" className="game-btn" onClick={showSolution}>
+              Show solution
             </button>
+            {(level > 0 || solved > 0) && (
+              <>
+                {' '}
+                <button type="button" className="game-btn game-btn-quiet" onClick={resetProgress}>
+                  Back to level 1
+                </button>
+              </>
+            )}
           </>
         )}
       </p>
