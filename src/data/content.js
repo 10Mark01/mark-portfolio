@@ -536,7 +536,7 @@ export const games = [
     id: 'gates',
     name: 'Gate puzzle',
     blurb:
-      'Drag AND, OR, XOR and NOT onto the board until your output column matches the target. Puzzles are generated, so they never run out. Two inputs and one gate to start, three inputs and two gates once you get going.',
+      'Build the circuit that matches the target truth table, with AND, OR, XOR, NAND, NOR and NOT on a live schematic. Click a row to probe it and watch the signal on each wire. Puzzles are generated and never run out: one gate to start, then chains, three-gate trees and NAND/NOR-only rounds.',
   },
   {
     id: 'bits',

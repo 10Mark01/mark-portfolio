@@ -1498,81 +1498,17 @@ footer h2 {
   margin-left: 4px;
 }
 
-.rig {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
 
-.rig-stage {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
 
-.rig-legs {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
 
-.rig-leg {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
 
-.rig-sig {
-  font-family: var(--mono);
-  font-size: 14px;
-  color: var(--ink);
-  width: 16px;
-}
 
-.rig-out {
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--faint);
-}
 
-.drop {
-  font-family: var(--mono);
-  background: transparent;
-  border: 1px dashed var(--line-strong);
-  border-radius: var(--radius);
-  color: var(--faint);
-  cursor: pointer;
-}
 
-.drop-inv {
-  font-size: 11px;
-  padding: 3px 8px;
-  min-width: 44px;
-}
 
-.drop-gate {
-  font-size: 14px;
-  padding: 12px 18px;
-  min-width: 84px;
-}
 
-.drop:hover {
-  border-color: var(--copper);
-  color: var(--copper);
-}
 
-.drop.is-set {
-  border-style: solid;
-  border-color: var(--copper);
-  color: var(--copper);
-  background: var(--surface);
-}
 
-.drop-inv.is-set {
-  border-color: var(--via);
-  color: var(--via);
-}
 
 .gate-win {
   color: var(--copper);
@@ -1583,6 +1519,9 @@ footer h2 {
   font-family: var(--mono);
   font-size: 12px;
   width: auto;
+  /* The global `table` rule sets min-width: 540px for the skills table;
+     this one is five narrow columns and must fit a phone. */
+  min-width: 0;
   /* Without this the table stretches to the flex column's full width and the
      columns drift metres apart. */
   align-self: flex-start;
@@ -1609,6 +1548,260 @@ footer h2 {
 .tt tr.is-bad td:last-child {
   color: var(--via);
   font-weight: 500;
+}
+
+/* ---- gate puzzle: schematic board ---- */
+
+.gate-note {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: -8px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.chip-icon {
+  flex: none;
+  overflow: visible;
+}
+
+.chip-icon .sch-body path,
+.chip-icon .sch-body circle {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3;
+}
+
+.chip-key {
+  font-size: 10px;
+  color: var(--faint);
+  margin-left: 2px;
+}
+
+.gate-board {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 18px 32px;
+}
+
+.gate-sch {
+  flex: 1 1 340px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sch {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.sch-wire {
+  fill: none;
+  stroke: var(--line-strong);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  transition: stroke 0.15s ease;
+}
+
+.sch-wire.is-1 {
+  stroke: var(--copper);
+}
+
+.sch-wire.is-x {
+  stroke-dasharray: 3 3;
+}
+
+.sch-dot {
+  fill: var(--line-strong);
+}
+
+.sch-dot.is-1 {
+  fill: var(--copper);
+}
+
+.sch-body path,
+.sch-body circle {
+  fill: var(--surface);
+  stroke: var(--ink);
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+}
+
+.sch-body .sch-back {
+  fill: none;
+}
+
+.sch-kind {
+  font-family: var(--mono);
+  font-size: 9px;
+  fill: var(--muted);
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+.sch-kind.is-empty {
+  fill: var(--faint);
+  font-size: 10px;
+}
+
+.sch-label {
+  font-family: var(--mono);
+  font-size: 12px;
+  fill: var(--muted);
+}
+
+.sch-mid {
+  font-size: 10px;
+  fill: var(--faint);
+}
+
+.sch-outpin .sch-label {
+  text-anchor: middle;
+  font-size: 10px;
+}
+
+.sch-target {
+  fill: var(--faint);
+}
+
+.sch-bit {
+  cursor: pointer;
+}
+
+.sch-bit rect {
+  fill: var(--ground);
+  stroke: var(--line-strong);
+}
+
+.sch-bit.is-1 rect {
+  fill: var(--copper-wash);
+  stroke: var(--copper);
+}
+
+.sch-bitval {
+  font-family: var(--mono);
+  font-size: 11px;
+  fill: var(--ink);
+  text-anchor: middle;
+}
+
+.sch-bit:hover rect,
+.sch-bit:focus-visible rect {
+  stroke: var(--copper);
+}
+
+.sch-bit:focus,
+.sch-slot:focus {
+  outline: none;
+}
+
+.sch-slot {
+  cursor: pointer;
+}
+
+.sch-hit {
+  fill: transparent;
+  stroke: transparent;
+  stroke-width: 1.2;
+  stroke-dasharray: 4 3;
+}
+
+.sch-empty {
+  fill: var(--surface);
+  stroke: var(--faint);
+  stroke-dasharray: 4 3;
+}
+
+.sch-inv-empty {
+  fill: var(--surface);
+  stroke: var(--faint);
+  stroke-dasharray: 2 2;
+}
+
+.sch-inv path,
+.sch-inv circle {
+  fill: var(--surface);
+  stroke: var(--via);
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+}
+
+.sch-slot:hover .sch-empty,
+.sch-slot:hover .sch-inv-empty,
+.sch-slot.is-open .sch-empty,
+.sch-slot.is-open .sch-inv-empty {
+  stroke: var(--copper);
+}
+
+.sch-slot.is-open .sch-hit,
+.sch-slot:focus-visible .sch-hit {
+  stroke: var(--copper);
+}
+
+.sch-slot.is-flash .sch-hit {
+  stroke: var(--via);
+  stroke-dasharray: none;
+  stroke-width: 2;
+}
+
+.sch-led {
+  fill: var(--ground);
+  stroke: var(--line-strong);
+  stroke-width: 1.6;
+  transition: fill 0.15s ease;
+}
+
+.sch-led.is-1 {
+  fill: var(--copper);
+  stroke: var(--copper);
+}
+
+.sch-led.is-bad {
+  stroke: var(--via);
+  stroke-width: 2.5;
+}
+
+.gate-expr {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.gate-probe {
+  font-size: 12px;
+}
+
+.tt tbody tr {
+  cursor: pointer;
+}
+
+.tt tbody tr:hover td {
+  color: var(--ink);
+}
+
+.tt tr.is-probe td {
+  background: var(--copper-wash);
+}
+
+.gate-result {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--muted);
 }
 
 /* ---- bit drill ---- */
