@@ -116,7 +116,8 @@ export const experience = [
     period: 'May 2024 – Aug 2024',
     domains: ['embedded'],
     bullets: [
-      'Monitored industrial chiller performance through temperature sensors and magnetic flow meters, validating system flow rates and efficiency.',
+      'Worked on Enwave\u2019s downtown Toronto district energy network. Its Deep Lake Water Cooling system cools about 180 buildings, from Union Station to the Eaton Centre, with 4 °C water drawn from more than 80 m down in Lake Ontario, using roughly 75% less electricity than conventional chillers.',
+      'Monitored chillers, boilers and economizers across the plant, using temperature sensors and magnetic flow meters to validate flow rates and cooling efficiency.',
       'Built automated Excel tooling to pull and graph HVAC data out of a Proficy historian, cutting a 30-minute data load to under a minute.',
       'Supported control system validation and sensor calibration, and contributed engineering calculations to compliance documentation behind $100K+ in energy incentives.',
     ],
